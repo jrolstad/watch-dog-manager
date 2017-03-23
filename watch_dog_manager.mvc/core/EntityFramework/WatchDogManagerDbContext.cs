@@ -7,7 +7,7 @@ namespace watch_dog_manager.mvc.core.EntityFramework
 	{
 		public WatchDogManagerDbContext(DbContextOptions<WatchDogManagerDbContext> options) : base(options)
         {
-			
+			this.Database.EnsureCreated();
 		}
 
 		public DbSet<models.Volunteer> Volunteer { get;set; }
