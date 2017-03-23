@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using watch_dog_manager.mvc.core.dependency_injection;
 using watch_dog_manager.mvc.core.EntityFramework;
 using watch_dog_manager.mvc.core.mappers;
 
@@ -29,15 +30,9 @@ namespace watch_dog_manager.mvc
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-			//services.AddDbContext<WatchDogManagerDbContext>(options =>
-			//	options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-			services.AddDbContext<WatchDogManagerDbContext>(options=>
-			   options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-
-			services.AddTransient<VolunteerMapper>();
-            services.AddMvc();
+		{
+			RegistrationModule.Register(services, Configuration);
+			services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
