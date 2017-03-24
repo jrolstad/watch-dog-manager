@@ -26,5 +26,6 @@
     <Folder Include="core\EntityFramework\models\" />
     <Folder Include="core\mappers\" />
     <Folder Include="core\dependency_injection\" />
+    <Folder Include="Views\Volunteer\" />
   </ItemGroup>
 </Project>

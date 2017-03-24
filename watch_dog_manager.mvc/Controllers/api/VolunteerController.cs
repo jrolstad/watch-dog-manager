@@ -5,7 +5,7 @@ using watch_dog_manager.mvc.core.EntityFramework;
 using watch_dog_manager.mvc.core.mappers;
 using watch_dog_manager.mvc.Models.api;
 
-namespace watch_dog_manager.mvc
+namespace watch_dog_manager.mvc.api
 {
 	public class VolunteerController:Controller
 	{
