@@ -8,7 +8,13 @@ namespace watch_dog_manager.mvc.core.mappers
 			var result = new Models.api.Volunteer 
 			{ 
 				Id = toMap.Id,
-				Name = toMap.Name
+				Name = toMap.Name,
+				Email = toMap.Email,
+				PhoneNumber = toMap.PhoneNumber,
+				Students = toMap.Students,
+				Teachers = toMap.Teachers,
+				LastBackgroundCheck = toMap.LastBackgroundCheck,
+				KickoffAttendee = toMap.KickoffAttendee
 			};
 
 			return result;
@@ -19,7 +25,13 @@ namespace watch_dog_manager.mvc.core.mappers
 			var result = new core.EntityFramework.models.Volunteer
 			{
 				Id = toMap.Id,
-				Name = toMap.Name
+				Name = toMap.Name,
+				Email = toMap.Email,
+				PhoneNumber = toMap.PhoneNumber,
+				Students = toMap.Students,
+				Teachers = toMap.Teachers,
+				LastBackgroundCheck = toMap.LastBackgroundCheck,
+				KickoffAttendee = toMap.KickoffAttendee
 			};
 
 			return result;
@@ -27,6 +39,14 @@ namespace watch_dog_manager.mvc.core.mappers
 
 		public core.EntityFramework.models.Volunteer MapExisting(core.EntityFramework.models.Volunteer existing, Models.api.Volunteer toMap)
 		{
+			existing.Name = toMap.Name;
+			existing.Email = toMap.Email;
+			existing.PhoneNumber = toMap.PhoneNumber;
+			existing.Students = toMap.Students;
+			existing.Teachers = toMap.Teachers;
+			existing.LastBackgroundCheck = toMap.LastBackgroundCheck;
+			existing.KickoffAttendee = toMap.KickoffAttendee;
+			                           
 			return existing;
 		}
 	}
