@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
+using WatchDogManager.EntityFramework;
 
 namespace WatchDogManager.Mvc
 {
@@ -10,6 +11,13 @@ namespace WatchDogManager.Mvc
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            MigrateDatabase();
+        }
+
+        private void MigrateDatabase()
+        {
+            var context = new WatchDogManagerDbContext();
+            context.Migrate();
         }
     }
 }

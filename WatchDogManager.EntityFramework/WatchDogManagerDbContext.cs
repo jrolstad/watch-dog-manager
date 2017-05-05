@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace WatchDogManager.EntityFramework
 {
@@ -14,7 +15,7 @@ namespace WatchDogManager.EntityFramework
 
         public WatchDogManagerDbContext() : this(ConfigurationManager.ConnectionStrings["WatchDogManagerDatabase"].ConnectionString)
         {
-
+            
         }
 
         public WatchDogManagerDbContext(string connectionString)
@@ -49,6 +50,11 @@ namespace WatchDogManager.EntityFramework
 
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public void Migrate()
+        {
+            this.Database.Migrate();
         }
 
         public virtual DbSet<Volunteer> Volunteers { get; set; }
