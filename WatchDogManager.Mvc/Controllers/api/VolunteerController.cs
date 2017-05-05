@@ -22,35 +22,40 @@ namespace WatchDogManager.Mvc.Controllers.api
             _manager = manager;
         }
 
-        // GET: api/Volunteer
+        [HttpGet]
+        [Route("api/volunteer")]
         public HttpResponseMessage Get()
         {
             var result = _manager.Get();
             return Request.CreateResponse(result);
         }
 
-        // GET: api/Volunteer/5
+        [HttpGet]
+        [Route("api/volunteer/{id}")]
         public HttpResponseMessage Get(int id)
         {
             var result = _manager.Get(id);
             return Request.CreateResponse(result);
         }
 
-        // POST: api/Volunteer
+        [HttpPost]
+        [Route("api/volunteer")]
         public HttpResponseMessage Post([FromBody]Models.api.Volunteer value)
         {
             var result = _manager.Create(value);
             return Request.CreateResponse(result);
         }
 
-        // PUT: api/Volunteer/5
+        [HttpPut]
+        [Route("api/volunteer")]
         public HttpResponseMessage Put(int id, [FromBody]Models.api.Volunteer value)
         {
             var result = _manager.Update(value);
             return Request.CreateResponse(result);
         }
 
-        // DELETE: api/Volunteer/5
+        [HttpDelete]
+        [Route("api/volunteer")]
         public HttpResponseMessage Delete(int id)
         {
             _manager.Delete(id);
