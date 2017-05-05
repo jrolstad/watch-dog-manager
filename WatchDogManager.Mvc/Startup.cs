@@ -16,8 +16,11 @@ namespace WatchDogManager.Mvc
 
         private void MigrateDatabase()
         {
-            var context = new WatchDogManagerDbContext();
-            context.Migrate();
+            using (var context = new WatchDogManagerDbContext())
+            {
+                context.Migrate();
+            }
+                
         }
     }
 }
