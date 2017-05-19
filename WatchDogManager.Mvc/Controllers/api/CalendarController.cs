@@ -8,31 +8,36 @@ namespace WatchDogManager.Mvc.Controllers.api
     [Authorize]
     public class CalendarController : ApiController
     {
-        // GET: api/Volunteer
+        [HttpGet]
+        [Route("api/calendar")]
         public HttpResponseMessage Get()
         {
             return Request.CreateResponse(new[] { new Calendar() });
         }
 
-        // GET: api/Volunteer/5
+        [HttpGet]
+        [Route("api/calendar/{id}")]
         public HttpResponseMessage Get(int id)
         {
             return Request.CreateResponse(new Calendar());
         }
 
-        // POST: api/Volunteer
+        [HttpPost]
+        [Route("api/calendar")]
         public HttpResponseMessage Post([FromBody]Calendar value)
         {
             return Request.CreateResponse(new Calendar());
         }
 
-        // PUT: api/Volunteer/5
+        [HttpPut]
+        [Route("api/calendar")]
         public HttpResponseMessage Put(int id, [FromBody]Calendar value)
         {
             return Request.CreateResponse(new Calendar());
         }
 
-        // DELETE: api/Volunteer/5
+        [HttpDelete]
+        [Route("api/calendar/{id}")]
         public HttpResponseMessage Delete(int id)
         {
             return Request.CreateResponse(HttpStatusCode.OK);
