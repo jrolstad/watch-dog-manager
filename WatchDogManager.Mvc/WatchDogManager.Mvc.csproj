@@ -291,6 +291,7 @@
   <ItemGroup>
     <Compile Include="Application\Managers\TeacherManager.cs" />
     <Compile Include="Application\Managers\VolunteerManager.cs" />
+    <Compile Include="Application\Mappers\TeacherMapper.cs" />
     <Compile Include="Application\Mappers\VolunteerMapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\api\CalendarController.cs" />
+    <Compile Include="Controllers\api\TeacherController.cs" />
     <Compile Include="Controllers\api\VolunteerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />

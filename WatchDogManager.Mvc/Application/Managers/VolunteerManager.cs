@@ -63,6 +63,7 @@ namespace WatchDogManager.Mvc.Application.Managers
             var dataEntity = _context.Volunteers.First(v => v.Id == id);
 
             _context.Volunteers.Remove(dataEntity);
+            _context.SaveChanges();
         }
     }
 }

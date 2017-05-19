@@ -15,7 +15,9 @@ namespace WatchDogManager.EntityFramework
 
         public WatchDogManagerDbContext() : this(ConfigurationManager.ConnectionStrings["WatchDogManagerDatabase"].ConnectionString)
         {
-            
+            // Add-Migration -Name InitialDb -StartupProject WatchDogManager.EntityFramework -Project WatchDogManager.EntityFramework -Verbose
+
+            // Update-Database -StartUpProject WatchDogManager.EntityFramework -Project WatchDogManager.EntityFramework -Verbose
         }
 
         public WatchDogManagerDbContext(string connectionString)
