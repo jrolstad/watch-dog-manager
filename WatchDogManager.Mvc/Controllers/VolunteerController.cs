@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WatchDogManager.Mvc.Controllers
 {
+    [Authorize]
     public class VolunteerController : Controller
     {
         public ActionResult Index()
