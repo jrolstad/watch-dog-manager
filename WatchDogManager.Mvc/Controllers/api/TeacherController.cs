@@ -21,7 +21,7 @@ namespace WatchDogManager.Mvc.Controllers.api
         }
 
         [HttpGet]
-        [Route("api/volunteer")]
+        [Route("api/teacher")]
         public HttpResponseMessage Get()
         {
             var result = _manager.Get();
@@ -29,7 +29,7 @@ namespace WatchDogManager.Mvc.Controllers.api
         }
 
         [HttpGet]
-        [Route("api/volunteer/{id}")]
+        [Route("api/teacher/{id}")]
         public HttpResponseMessage Get(int id)
         {
             var result = _manager.Get(id);
@@ -37,7 +37,7 @@ namespace WatchDogManager.Mvc.Controllers.api
         }
 
         [HttpPost]
-        [Route("api/volunteer")]
+        [Route("api/teacher")]
         public HttpResponseMessage Post([FromBody]Models.api.Teacher value)
         {
             var result = _manager.Create(value);
@@ -45,7 +45,7 @@ namespace WatchDogManager.Mvc.Controllers.api
         }
 
         [HttpPut]
-        [Route("api/volunteer")]
+        [Route("api/teacher")]
         public HttpResponseMessage Put(int id, [FromBody]Models.api.Teacher value)
         {
             var result = _manager.Update(value);
@@ -53,7 +53,7 @@ namespace WatchDogManager.Mvc.Controllers.api
         }
 
         [HttpDelete]
-        [Route("api/volunteer")]
+        [Route("api/teacher")]
         public HttpResponseMessage Delete(int id)
         {
             _manager.Delete(id);
