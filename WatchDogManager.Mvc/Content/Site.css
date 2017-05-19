@@ -17,8 +17,66 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
+}*/
+
+h1.panel-title {
+    font-size: 36px;
+}
+
+h2.panel-title {
+    font-size: 30px;
+}
+
+h3.panel-title {
+    font-size: 24px;
+}
+
+h4.panel-title {
+    font-size: 18px
+}
+
+h5.panel-title {
+    font-size: 14px
+}
+
+h6.panel-title {
+    font-size: 10px;
+}
+
+.top5 {
+    margin-top: 5px;
+}
+
+.top7 {
+    margin-top: 7px;
+}
+
+.top10 {
+    margin-top: 10px;
+}
+
+.top15 {
+    margin-top: 15px;
+}
+
+.top17 {
+    margin-top: 17px;
+}
+
+.top30 {
+    margin-top: 30px;
+}
+
+.k-grid td {
+    padding: .1em .3em;
+}
+
+.panel-default > .panel-heading > .panel-title {
+    color: #555555;
+    background-color: #f5f5f5;
+    border-color: #dddddd;
 }
