@@ -8,9 +8,10 @@ using WatchDogManager.EntityFramework;
 namespace WatchDogManager.EntityFramework.Migrations
 {
     [DbContext(typeof(WatchDogManagerDbContext))]
-    partial class WatchDogManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170519151908_AddTeachers")]
+    partial class AddTeachers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

@@ -5,6 +5,7 @@ using WatchDogManager.Mvc.Models.api;
 
 namespace WatchDogManager.Mvc.Controllers.api
 {
+    [Authorize]
     public class CalendarController : ApiController
     {
         // GET: api/Volunteer

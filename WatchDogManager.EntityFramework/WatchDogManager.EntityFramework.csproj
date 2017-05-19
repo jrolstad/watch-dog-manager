@@ -192,7 +192,12 @@
     <Compile Include="Migrations\20170504230229_InitialDb.designer.cs">
       <DependentUpon>20170504230229_InitialDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170519151908_AddTeachers.cs" />
+    <Compile Include="Migrations\20170519151908_AddTeachers.designer.cs">
+      <DependentUpon>20170519151908_AddTeachers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\WatchDogManagerDbContextModelSnapshot.cs" />
+    <Compile Include="Teacher.cs" />
     <Compile Include="Volunteer.cs" />
     <Compile Include="WatchDogManagerDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

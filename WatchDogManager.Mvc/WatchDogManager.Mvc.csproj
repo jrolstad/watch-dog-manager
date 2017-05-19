@@ -289,6 +289,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Managers\TeacherManager.cs" />
     <Compile Include="Application\Managers\VolunteerManager.cs" />
     <Compile Include="Application\Mappers\VolunteerMapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -305,6 +306,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\api\Calendar.cs" />
+    <Compile Include="Models\api\Teacher.cs" />
     <Compile Include="Models\api\Volunteer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

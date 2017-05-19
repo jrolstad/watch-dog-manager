@@ -30,6 +30,15 @@ namespace WatchDogManager.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Teacher>(entity =>
+            {
+                entity.Property(e => e.FirstName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.LastName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Grade).IsRequired().HasMaxLength(25);
+                entity.Property(e => e.RoomNumber).IsRequired().HasMaxLength(25);
+
+            });
+
             modelBuilder.Entity<Volunteer>(entity =>
             {
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
@@ -56,6 +65,8 @@ namespace WatchDogManager.EntityFramework
         {
             this.Database.Migrate();
         }
+
+        public virtual DbSet<Teacher> Teachers { get; set; }
 
         public virtual DbSet<Volunteer> Volunteers { get; set; }
 

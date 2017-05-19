@@ -9,6 +9,7 @@ using WatchDogManager.Mvc.Application.Mappers;
 
 namespace WatchDogManager.Mvc.Controllers.api
 {
+    [Authorize]
     public class VolunteerController : ApiController
     {
         private readonly VolunteerManager _manager;
