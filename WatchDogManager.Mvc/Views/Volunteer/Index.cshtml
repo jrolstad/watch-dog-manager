@@ -84,13 +84,12 @@
 {
     <script type="text/javascript">
 
-        var viewModel = function() {
+        var VolunteerViewModel = function(baseUrl) {
             var self = this;
 
-            self.volunteers = [
-                { "Id": 1, "Name": "Josh Rolstad", "Email": "jrosltad@gmail.com", "BackgroundCheck": new Date() },
-                { "Id": 2, "Name": "Someone Else", "Email": "someone@outlook.com", "BackgroundCheck": null }
-            ];
+            self.errorMessage = ko.observable("");
+
+            self.volunteers = ko.observableArray();
 
             self.selectedUser = null;
             self.selectedUserName = ko.observable();
@@ -128,11 +127,32 @@
 
                 $("#detail-dialog").modal("show");
             };
+
+            self.initialize = function () {
+                var getAllUrl = baseUrl;
+
+                $.ajax({
+                    type: "GET",
+                    url: getAllUrl,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        self.volunteers(response);
+                    },
+                    error: function (response) {
+                        self.errorMessage(response);
+                    }
+                });
+            };
         }
 
-        $(document).ready(function() {
-            ko.applyBindings(new viewModel());
+        $(document).ready(function () {
+            var baseUrl = '@Url.RouteUrl("DefaultApi", new {httproute = "", controller = "Volunteer"})';
 
+            var viewModel = new VolunteerViewModel(baseUrl);
+            ko.applyBindings(viewModel);
+
+            viewModel.initialize();
         });
 
     </script>
