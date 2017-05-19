@@ -56,7 +56,7 @@ namespace WatchDogManager.Mvc.Controllers.api
         }
 
         [HttpDelete]
-        [Route("api/volunteer")]
+        [Route("api/volunteer/{id}")]
         public IHttpActionResult Delete(int id)
         {
             _manager.Delete(id);
