@@ -2,23 +2,138 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="panel panel-primary top15">
-    <div class="panel-heading">
-        <h3 id="form-header" class="panel-title">Volunteers</h3>
+<div id="teacherScope">
+    
+    <div class="panel panel-primary top15">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6"><h3 id="form-header" class="panel-title">Volunteers</h3></div>
+                <div class="col-md-6"><button type="button" class="btn btn-info pull-right" data-bind="click: showNew">New</button></div>
+            </div>
+
+            </div>
+        <div class="panel-body">
+            <table class="table table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Background Check</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach:volunteers">
+                <tr>
+                    <td data-bind="text: Name"></td>
+                    <td data-bind="text: Email"></td>
+                    <td data-bind="text: BackgroundCheck"></td>
+                    <td><button type="button" class="btn btn-primary" data-bind="click: $parent.showDetail">View</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="panel-body">
-        <table class="table table-condensed table-striped">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Background Check</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
+    
+    <div id="detail-dialog" class="modal fade" role="dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title"><span data-bind="text: selectedUserName"></span></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label class="col-md-5 control-label">Name</label>
+                        <input type="text" class="form-control" data-bind="value: selectedUserName"/>
+                    </div> 
+                    <div class="row">
+                        <label class="col-md-5 control-label">Email</label>
+                        <input type="text" class="form-control" data-bind="value: selectedUserEmail" />
+                    </div> 
+                    <div class="row">
+                        <label class="col-md-5 control-label">Phone</label>
+                        <input type="text" class="form-control" data-bind="value: selectedUserPhone" />
+                    </div> 
+                    <div class="row">
+                        <label class="col-md-5 control-label">Last Background Check</label>
+                        <input type="text" class="form-control" data-bind="value: selectedUserBackgroundCheck" />
+                    </div> 
+                    <div class="row">
+                        <label class="col-md-5 control-label">Students</label>
+                        <input type="text" class="form-control" data-bind="value: selectedUserStudents" />
+                    </div> 
+                    <div class="row">
+                        <label class="col-md-5 control-label">Teachers</label>
+                        <input type="text" class="form-control" data-bind="value: selectedUserTeachers" />
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
     </div>
+    
+
 </div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        var viewModel = function() {
+            var self = this;
+
+            self.volunteers = [
+                { "Id": 1, "Name": "Josh Rolstad", "Email": "jrosltad@gmail.com", "BackgroundCheck": new Date() },
+                { "Id": 2, "Name": "Someone Else", "Email": "someone@outlook.com", "BackgroundCheck": null }
+            ];
+
+            self.selectedUser = null;
+            self.selectedUserName = ko.observable();
+            self.selectedUserEmail = ko.observable();
+            self.selectedUserPhone = ko.observable();
+            self.selectedUserBackgroundCheck = ko.observable();
+            self.selectedUserStudents = ko.observable();
+            self.selectedUserTeachers = ko.observable();
+
+            self.showDetail = function(item) {
+
+                self.selectedUser = item;
+
+                self.selectedUserName(item.Name);
+                self.selectedUserEmail(item.Email);
+                self.selectedUserPhone(item.Phone);
+                self.selectedUserBackgroundCheck(item.BackgroundCheck);
+                self.selectedUserStudents(item.Students);
+                self.selectedUserTeachers(item.Teachers);
+
+                $("#detail-dialog").modal("show");
+            };
+
+            self.deleteSelected = function() {
+
+            };
+
+            self.showNew = function() {
+                self.selectedUserName("");
+                self.selectedUserEmail("");
+                self.selectedUserPhone("");
+                self.selectedUserBackgroundCheck("");
+                self.selectedUserStudents("");
+                self.selectedUserTeachers("");
+
+                $("#detail-dialog").modal("show");
+            };
+        }
+
+        $(document).ready(function() {
+            ko.applyBindings(new viewModel());
+
+        });
+
+    </script>
+}
