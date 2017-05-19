@@ -9,7 +9,7 @@ using WatchDogManager.Mvc.Application.Mappers;
 
 namespace WatchDogManager.Mvc.Controllers.api
 {
-    [Authorize]
+    //[Authorize]
     public class VolunteerController : ApiController
     {
         private readonly VolunteerManager _manager;
@@ -25,42 +25,42 @@ namespace WatchDogManager.Mvc.Controllers.api
 
         [HttpGet]
         [Route("api/volunteer")]
-        public HttpResponseMessage Get()
+        public IHttpActionResult Get()
         {
             var result = _manager.Get();
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("api/volunteer/{id}")]
-        public HttpResponseMessage Get(int id)
+        public IHttpActionResult Get(int id)
         {
             var result = _manager.Get(id);
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("api/volunteer")]
-        public HttpResponseMessage Post([FromBody]Models.api.Volunteer value)
+        public IHttpActionResult Post([FromBody]Models.api.Volunteer value)
         {
             var result = _manager.Create(value);
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("api/volunteer")]
-        public HttpResponseMessage Put(int id, [FromBody]Models.api.Volunteer value)
+        public IHttpActionResult Put(int id, [FromBody]Models.api.Volunteer value)
         {
             var result = _manager.Update(value);
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpDelete]
         [Route("api/volunteer")]
-        public HttpResponseMessage Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
             _manager.Delete(id);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Ok(HttpStatusCode.OK);
         }
     }
 }

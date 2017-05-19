@@ -22,42 +22,42 @@ namespace WatchDogManager.Mvc.Controllers.api
 
         [HttpGet]
         [Route("api/teacher")]
-        public HttpResponseMessage Get()
+        public IHttpActionResult Get()
         {
             var result = _manager.Get();
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("api/teacher/{id}")]
-        public HttpResponseMessage Get(int id)
+        public IHttpActionResult Get(int id)
         {
             var result = _manager.Get(id);
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("api/teacher")]
-        public HttpResponseMessage Post([FromBody]Models.api.Teacher value)
+        public IHttpActionResult Post([FromBody]Models.api.Teacher value)
         {
             var result = _manager.Create(value);
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("api/teacher")]
-        public HttpResponseMessage Put(int id, [FromBody]Models.api.Teacher value)
+        public IHttpActionResult Put(int id, [FromBody]Models.api.Teacher value)
         {
             var result = _manager.Update(value);
-            return Request.CreateResponse(result);
+            return Ok(result);
         }
 
         [HttpDelete]
         [Route("api/teacher")]
-        public HttpResponseMessage Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
             _manager.Delete(id);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Ok(HttpStatusCode.OK);
         }
     }
 }
