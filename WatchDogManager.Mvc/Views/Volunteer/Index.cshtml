@@ -4,6 +4,16 @@
 
 <div id="teacherScope">
     
+    <div class="row">
+        <span class="alert alert-danger col-sm-offset-2 col-sm-8 top5"
+              data-bind="visible: errorMessageVisible" style="display: none">
+              
+            <span class="glyphicon glyphicon-warning-sign"></span>
+            <span data-bind="html: errorMessage"></span>
+        </span>
+          
+    </div>
+
     <div class="panel panel-primary top15">
         <div class="panel-heading">
             <div class="row">
@@ -88,7 +98,7 @@
             var self = this;
 
             self.errorMessage = ko.observable("");
-
+            self.errorMessageVisible = ko.computed(function () { return self.errorMessage().length > 0});
             self.volunteers = ko.observableArray();
 
             self.isNewUser = false;
@@ -136,12 +146,12 @@
                     var createUrl = baseUrl;
 
                     var createItem = {};
-                    createItem.Name = self.selectedUserName;
-                    createItem.Email = self.selectedUserEmail;
-                    createItem.Phone = self.selectedUserPhone;
-                    createItem.BackgroundCheck = self.selectedUserBackgroundCheck;
-                    createItem.Students = self.selectedUserStudents;
-                    createItem.Teachers = self.selectedUserTeachers;
+                    createItem.Name = self.selectedUserName();
+                    createItem.Email = self.selectedUserEmail();
+                    createItem.Phone = self.selectedUserPhone();
+                    createItem.BackgroundCheck = self.selectedUserBackgroundCheck();
+                    createItem.Students = self.selectedUserStudents();
+                    createItem.Teachers = self.selectedUserTeachers();
 
                     $.ajax({
                         type: "POST",
@@ -161,12 +171,12 @@
                     var updateUrl = baseUrl;
 
                     var updateItem = self.selectedUser;
-                    updateItem.Name = self.selectedUserName;
-                    updateItem.Email = self.selectedUserEmail;
-                    updateItem.Phone = self.selectedUserPhone;
-                    updateItem.BackgroundCheck = self.selectedUserBackgroundCheck;
-                    updateItem.Students = self.selectedUserStudents;
-                    updateItem.Teachers = self.selectedUserTeachers;
+                    updateItem.Name = self.selectedUserName();
+                    updateItem.Email = self.selectedUserEmail();
+                    updateItem.Phone = self.selectedUserPhone();
+                    updateItem.BackgroundCheck = self.selectedUserBackgroundCheck();
+                    updateItem.Students = self.selectedUserStudents();
+                    updateItem.Teachers = self.selectedUserTeachers();
 
                     $.ajax({
                         type: "PUT",
@@ -177,8 +187,8 @@
                         success: function(response) {
                             self.getVolunteers();
                         },
-                        error: function(response) {
-                            self.errorMessage(response);
+                        error: function (response) {
+                            self.errorMessage(response.responseText);
                         }
                     });
                 }
