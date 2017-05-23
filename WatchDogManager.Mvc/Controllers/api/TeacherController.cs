@@ -46,7 +46,7 @@ namespace WatchDogManager.Mvc.Controllers.api
 
         [HttpPut]
         [Route("api/teacher")]
-        public IHttpActionResult Put(int id, [FromBody]Models.api.Teacher value)
+        public IHttpActionResult Put([FromBody]Models.api.Teacher value)
         {
             var result = _manager.Update(value);
             return Ok(result);
