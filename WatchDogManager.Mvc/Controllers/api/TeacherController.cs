@@ -7,6 +7,7 @@ using WatchDogManager.Mvc.Application.Mappers;
 
 namespace WatchDogManager.Mvc.Controllers.api
 {
+    [Authorize]
     public class TeacherController : ApiController
     {
         private readonly TeacherManager _manager;
@@ -53,7 +54,7 @@ namespace WatchDogManager.Mvc.Controllers.api
         }
 
         [HttpDelete]
-        [Route("api/teacher")]
+        [Route("api/teacher/{id}")]
         public IHttpActionResult Delete(int id)
         {
             _manager.Delete(id);
