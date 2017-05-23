@@ -49,7 +49,7 @@ namespace WatchDogManager.Mvc.Controllers.api
 
         [HttpPut]
         [Route("api/volunteer")]
-        public IHttpActionResult Put(int id, [FromBody]Models.api.Volunteer value)
+        public IHttpActionResult Put([FromBody]Models.api.Volunteer value)
         {
             var result = _manager.Update(value);
             return Ok(result);
