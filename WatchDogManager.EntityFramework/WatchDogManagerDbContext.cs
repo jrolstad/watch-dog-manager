@@ -59,6 +59,17 @@ namespace WatchDogManager.EntityFramework
                 entity.HasOne(e => e.Volunteer).WithMany(e=>e.DaysSignedUp).HasForeignKey(e => e.VolunteerId);
             });
 
+            modelBuilder.Entity<Schedule>(entity =>
+            {
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.HasOne(e => e.Teacher).WithMany(e => e.Schedules).HasForeignKey(e => e.TeacherId);
+                entity.HasMany(e => e.Availability).WithOne(e => e.Schedule).HasForeignKey(e => e.ScheduleId);
+            });
+
+            modelBuilder.Entity<ScheduleAvailability>(entity =>
+            {
+                entity.Property(e => e.At).HasColumnType("datetime");
+            });
 
             base.OnModelCreating(modelBuilder);
         }
