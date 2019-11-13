@@ -15,9 +15,15 @@ namespace watchdogplatform.core.Managers
 
         public async Task<User> GetCurrent()
         {
-            return new User
+            var user = Map(_currentPrincipal);
+            return user;
+        }
+
+        private User Map(ClaimsPrincipal principal)
+        {
+            var user = new User
             {
-                Name = _currentPrincipal?.Identity?.Name
+                Name = principal?.Identity.Name
             };
         }
     }
