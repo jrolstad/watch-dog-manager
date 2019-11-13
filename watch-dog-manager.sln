@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogManager.Mvc", "WatchDogManager.Mvc\WatchDogManager.Mvc.csproj", "{9827DEC7-ED09-48D4-82C6-5790D66878C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogplatform.core", "watchdogplatform.core\watchdogplatform.core.csproj", "{1CF63606-C751-4F0F-AF13-5B55E9C508CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogManager.EntityFramework", "WatchDogManager.EntityFramework\WatchDogManager.EntityFramework.csproj", "{4EB308A5-26E8-40C8-8D2E-70B2C41A058A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogplatform.functions", "watchdogplatform.functions\watchdogplatform.functions.csproj", "{BD1AF2A3-F553-4460-8CBE-5CD7D57D35DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9827DEC7-ED09-48D4-82C6-5790D66878C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9827DEC7-ED09-48D4-82C6-5790D66878C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9827DEC7-ED09-48D4-82C6-5790D66878C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9827DEC7-ED09-48D4-82C6-5790D66878C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EB308A5-26E8-40C8-8D2E-70B2C41A058A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EB308A5-26E8-40C8-8D2E-70B2C41A058A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EB308A5-26E8-40C8-8D2E-70B2C41A058A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EB308A5-26E8-40C8-8D2E-70B2C41A058A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF63606-C751-4F0F-AF13-5B55E9C508CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF63606-C751-4F0F-AF13-5B55E9C508CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF63606-C751-4F0F-AF13-5B55E9C508CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF63606-C751-4F0F-AF13-5B55E9C508CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD1AF2A3-F553-4460-8CBE-5CD7D57D35DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD1AF2A3-F553-4460-8CBE-5CD7D57D35DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD1AF2A3-F553-4460-8CBE-5CD7D57D35DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD1AF2A3-F553-4460-8CBE-5CD7D57D35DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA1841F8-674F-48E9-BF54-35B054108092}
 	EndGlobalSection
 EndGlobal
