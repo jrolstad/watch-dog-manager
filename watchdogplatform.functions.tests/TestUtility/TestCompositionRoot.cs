@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using watchdogplatform.core.Repositories;
 using watchdogplatform.functions.Application;
 using watchdogplatform.functions.tests.TestUtility.Extensions;
 using watchdogplatform.functions.tests.TestUtility.Fakes;
@@ -38,6 +39,8 @@ namespace watchdogplatform.functions.tests.TestUtility
         {
             serviceCollection.AddSingleton<TestContext>();
             serviceCollection.ReplaceTransient<IHttpContextAccessor, FakeHttpContextAccessor>();
+
+            serviceCollection.ReplaceSingleton<ILogger<VolunteerRepository>, FakeLogger<VolunteerRepository>>();
         }
 
         public T Get<T>()
@@ -47,7 +50,7 @@ namespace watchdogplatform.functions.tests.TestUtility
 
         public ILogger CoreLogger()
         {
-            return new FakeLogger(this.Context);
+            return new FakeLogger<object>(this.Context);
         }
 
         public HttpRequest HttpRequest()

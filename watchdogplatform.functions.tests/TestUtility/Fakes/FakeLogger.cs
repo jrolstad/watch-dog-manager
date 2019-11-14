@@ -3,7 +3,8 @@ using Microsoft.Extensions.Logging;
 
 namespace watchdogplatform.functions.tests.TestUtility.Fakes
 {
-    public class FakeLogger:ILogger
+   
+    public class FakeLogger<T>:ILogger,ILogger<T>
     {
         private readonly TestContext _context;
 
