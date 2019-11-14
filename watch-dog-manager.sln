@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests (Unit)", "Tests (Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogplatform.functions.tests", "watchdogplatform.functions.tests\watchdogplatform.functions.tests.csproj", "{5F23B0D6-F2FD-47F5-B52D-5D533C5AE666}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogplatform.entityframework", "watchdogplatform.entityframework\watchdogplatform.entityframework.csproj", "{7089C2C1-82C4-4ECE-8F07-4B2344744587}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{5F23B0D6-F2FD-47F5-B52D-5D533C5AE666}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F23B0D6-F2FD-47F5-B52D-5D533C5AE666}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F23B0D6-F2FD-47F5-B52D-5D533C5AE666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7089C2C1-82C4-4ECE-8F07-4B2344744587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7089C2C1-82C4-4ECE-8F07-4B2344744587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7089C2C1-82C4-4ECE-8F07-4B2344744587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7089C2C1-82C4-4ECE-8F07-4B2344744587}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
+﻿using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using watchdogplatform.core.Repositories;
+using watchdogplatform.entityframework;
 using watchdogplatform.functions.Application;
 using watchdogplatform.functions.tests.TestUtility.Extensions;
 using watchdogplatform.functions.tests.TestUtility.Fakes;
@@ -15,6 +17,7 @@ namespace watchdogplatform.functions.tests.TestUtility
     public class TestCompositionRoot
     {
         private readonly ServiceProvider _provider;
+        private string _inMemoryDatabaseName;
 
         public static TestCompositionRoot Create()
         {
@@ -23,9 +26,12 @@ namespace watchdogplatform.functions.tests.TestUtility
 
         private TestCompositionRoot(IServiceCollection serviceCollection)
         {
+            _inMemoryDatabaseName = Guid.NewGuid().ToString();
+
             DependencyInjectionConfig.Configure(serviceCollection);
             RegisterFunctions(serviceCollection);
             RegisterFakes(serviceCollection);
+
             _provider = serviceCollection.BuildServiceProvider();
         }
 
@@ -43,6 +49,14 @@ namespace watchdogplatform.functions.tests.TestUtility
             serviceCollection.ReplaceTransient<IHttpContextAccessor, FakeHttpContextAccessor>();
 
             serviceCollection.ReplaceSingleton<ILogger<VolunteerRepository>, FakeLogger<VolunteerRepository>>();
+
+            serviceCollection.ReplaceTransient<WatchDogPlatformDbContext>(context =>
+            {
+                var options = new DbContextOptionsBuilder<WatchDogPlatformDbContext>()
+                    .UseInMemoryDatabase(databaseName:_inMemoryDatabaseName)
+                    .Options;
+                return new WatchDogPlatformDbContext(options);
+            });
         }
 
         public T Get<T>()
@@ -70,11 +84,5 @@ namespace watchdogplatform.functions.tests.TestUtility
             return request;
 
         }
-    }
-
-    public class TestContext
-    {
-        public ClaimsPrincipal CurrentPrincipal;
-        public List<LoggedMessage> LoggedMessages = new List<LoggedMessage>();
     }
 }

@@ -15,6 +15,8 @@ namespace watchdogplatform.functions.tests
         {
             // Given
             var root = TestCompositionRoot.Create();
+            root.WithVolunteer("one-volunteer");
+            root.WithVolunteer("two-volunteer");
 
             var api = root.Get<VolunteerApi>();
 
