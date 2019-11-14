@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "watchdogplatform.functions"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests (Unit)", "Tests (Unit)", "{9C035D89-75E6-42BD-A1E5-09EF23993767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogplatform.functions.tests", "watchdogplatform.functions.tests\watchdogplatform.functions.tests.csproj", "{5F23B0D6-F2FD-47F5-B52D-5D533C5AE666}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "watchdogplatform.functions.tests", "watchdogplatform.functions.tests\watchdogplatform.functions.tests.csproj", "{5F23B0D6-F2FD-47F5-B52D-5D533C5AE666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogplatform.entityframework", "watchdogplatform.entityframework\watchdogplatform.entityframework.csproj", "{7089C2C1-82C4-4ECE-8F07-4B2344744587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "watchdogplatform.entityframework", "watchdogplatform.entityframework\watchdogplatform.entityframework.csproj", "{7089C2C1-82C4-4ECE-8F07-4B2344744587}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3834D67-9C92-48BA-ADE0-DEFE12881DDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
