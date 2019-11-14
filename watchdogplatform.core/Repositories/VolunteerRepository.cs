@@ -43,7 +43,7 @@ namespace watchdogplatform.core.Repositories
                 UpdateDataModel(existingItem, instance);
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             var savedData = _context.Volunteers.Find(instance.Id);
             var savedDomain = MapToDomain(savedData);
