@@ -42,6 +42,7 @@ namespace watchdogplatform.functions.tests.TestUtility
             serviceCollection.AddTransient<HealthApi>();
             serviceCollection.AddTransient<UserApi>();
             serviceCollection.AddTransient<VolunteerApi>();
+            serviceCollection.AddTransient<OrganizationApi>();
         }
         private void RegisterFakes(IServiceCollection serviceCollection)
         {
@@ -49,8 +50,9 @@ namespace watchdogplatform.functions.tests.TestUtility
             serviceCollection.ReplaceTransient<IHttpContextAccessor, FakeHttpContextAccessor>();
 
             serviceCollection.ReplaceSingleton<ILogger<VolunteerRepository>, FakeLogger<VolunteerRepository>>();
+            serviceCollection.ReplaceSingleton<ILogger<OrganizationRepository>, FakeLogger<OrganizationRepository>>();
 
-            serviceCollection.ReplaceTransient<WatchDogPlatformDbContext>(context =>
+            serviceCollection.ReplaceTransient(context =>
             {
                 var options = new DbContextOptionsBuilder<WatchDogPlatformDbContext>()
                     .UseInMemoryDatabase(databaseName:_inMemoryDatabaseName)

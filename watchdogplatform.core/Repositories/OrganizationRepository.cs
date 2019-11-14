@@ -52,7 +52,7 @@ namespace watchdogplatform.core.Repositories
             return savedDomain;
         }
 
-        private Organization MapToDomain(entityframework.Models.Organization toMap)
+        private static Organization MapToDomain(entityframework.Models.Organization toMap)
         {
             var domain = new Organization
             {
@@ -64,7 +64,7 @@ namespace watchdogplatform.core.Repositories
             return domain;
         }
 
-        private entityframework.Models.Organization MapToData(Organization toMap)
+        private static entityframework.Models.Organization MapToData(Organization toMap)
         {
             var dataModel = new entityframework.Models.Organization
             {
@@ -76,7 +76,7 @@ namespace watchdogplatform.core.Repositories
             return dataModel;
         }
 
-        private void UpdateDataModel(entityframework.Models.Organization toUpdate, Organization source)
+        private static void UpdateDataModel(entityframework.Models.Organization toUpdate, Organization source)
         {
             toUpdate.Name = source.Name;
             toUpdate.AffiliatedWith = source.AffiliatedWith;

@@ -18,5 +18,19 @@ namespace watchdogplatform.functions.tests.TestUtility.Extensions
 
             context.SaveChanges();
         }
+
+        public static void WithOrganization(this TestCompositionRoot root, string name, string affiliatedWith = null)
+        {
+            var context = root.Get<WatchDogPlatformDbContext>();
+
+            context.Organizations.Add(new entityframework.Models.Organization
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = name,
+                AffiliatedWith = affiliatedWith
+            });
+
+            context.SaveChanges();
+        }
     }
 }
