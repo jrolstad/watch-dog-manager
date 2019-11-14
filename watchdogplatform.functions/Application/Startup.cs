@@ -10,7 +10,6 @@ namespace watchdogplatform.functions.Application
         public override void Configure(IFunctionsHostBuilder builder)
         {
             DependencyInjectionConfig.Configure(builder.Services);
-           
         }
     }
 }
