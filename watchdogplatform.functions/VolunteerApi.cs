@@ -22,7 +22,7 @@ namespace watchdogplatform.functions
         }
         [FunctionName("api-volunteer")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "volunteer")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", "put", Route = "volunteer")] HttpRequest req,
             ILogger log)
         {
             if (string.Equals(req.Method, HttpMethods.Post, StringComparison.InvariantCultureIgnoreCase))
