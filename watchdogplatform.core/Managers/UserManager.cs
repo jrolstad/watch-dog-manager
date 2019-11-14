@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using watchdogplatform.core.Models;
 
@@ -23,10 +25,36 @@ namespace watchdogplatform.core.Managers
         {
             var user = new User
             {
-                Name = principal?.Identity.Name
+                Name = principal?.Identity.Name,
+                IsAuthenticated = principal?.Identity?.IsAuthenticated ?? false,
+                Claims = Map(principal?.Claims)
             };
-
+            
             return user;
+        }
+
+        private IReadOnlyCollection<UserClaim> Map(IEnumerable<Claim> claims)
+        {
+            if (claims == null)
+                return new List<UserClaim>();
+
+            var userClaims = claims
+                .AsParallel()
+                .Select(Map)
+                .ToList();
+
+            return userClaims;
+        }
+
+        private static UserClaim Map(Claim c)
+        {
+            return new UserClaim
+            {
+                Issuer = c.Issuer,
+                Type = c.Type,
+                Value = c.Value,
+                Properties = c.Properties ?? new Dictionary<string, string>()
+            };
         }
     }
 }
