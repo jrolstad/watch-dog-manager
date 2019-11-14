@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using watchdogplatform.core.Models;
 using watchdogplatform.functions.tests.TestUtility;
+using watchdogplatform.functions.tests.TestUtility.Extensions;
 using Xunit;
 
 namespace watchdogplatform.functions.tests
@@ -21,14 +22,7 @@ namespace watchdogplatform.functions.tests
             var result = await api.Run(root.HttpRequest(), root.CoreLogger());
 
             // Then
-            Assert.NotNull(result);
-            Assert.IsType<OkObjectResult>(result);
-
-            var typedResult = (OkObjectResult) result;
-            Assert.NotNull(typedResult.Value);
-            Assert.IsType<ApplicationHealth>(typedResult.Value);
-
-            var healthResult = (ApplicationHealth) typedResult.Value;
+            var healthResult = result.AssertIsOkResultWithValue<ApplicationHealth>();
 
             Assert.True(!string.IsNullOrWhiteSpace(healthResult.Version));
             Assert.InRange(healthResult.CurrentDateTime, DateTime.Today, DateTime.Today.AddDays(1));

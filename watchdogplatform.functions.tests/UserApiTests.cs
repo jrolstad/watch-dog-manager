@@ -23,7 +23,7 @@ namespace watchdogplatform.functions.tests
             var result = await api.Run(root.HttpRequest(), root.CoreLogger());
 
             // Then
-            var userResult = AssertIsUserResult(result);
+            var userResult = result.AssertIsOkResultWithValue<User>();
 
             Assert.Empty(userResult.Claims);
             Assert.Null(userResult.Name);
@@ -43,24 +43,13 @@ namespace watchdogplatform.functions.tests
             var result = await api.Run(root.HttpRequest(), root.CoreLogger());
 
             // Then
-            var userResult = AssertIsUserResult(result);
+            var userResult = result.AssertIsOkResultWithValue<User>();
 
             Assert.Equal("the-user",userResult.Name);
             Assert.NotEmpty(userResult.Claims);
             Assert.True(userResult.IsAuthenticated);
         }
 
-        private static User AssertIsUserResult(IActionResult result)
-        {
-            Assert.NotNull(result);
-            Assert.IsType<OkObjectResult>(result);
-
-            var typedResult = (OkObjectResult) result;
-            Assert.NotNull(typedResult.Value);
-            Assert.IsType<User>(typedResult.Value);
-
-            var userResult = (User) typedResult.Value;
-            return userResult;
-        }
+        
     }
 }

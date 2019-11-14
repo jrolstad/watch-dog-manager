@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using watchdogplatform.core.Models;
 using watchdogplatform.functions.tests.TestUtility;
+using watchdogplatform.functions.tests.TestUtility.Extensions;
 using Xunit;
 
 namespace watchdogplatform.functions.tests
@@ -22,14 +23,7 @@ namespace watchdogplatform.functions.tests
             var result = await api.Run(root.HttpRequest(), root.CoreLogger());
 
             // Then
-            Assert.NotNull(result);
-            Assert.IsType<OkObjectResult>(result);
-
-            var typedResult = (OkObjectResult) result;
-            Assert.NotNull(typedResult.Value);
-            Assert.IsType<List<Volunteer>>(typedResult.Value);
-
-            var volunteers = (List<Volunteer>) typedResult.Value;
+            var volunteers = result.AssertIsOkResultWithValue<List<Volunteer>>();
             Assert.NotEmpty(volunteers);
 
         }
