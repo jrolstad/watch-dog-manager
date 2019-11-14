@@ -25,6 +25,8 @@ namespace watchdogplatform.core.Managers
             {
                 Name = principal?.Identity.Name
             };
+
+            return user;
         }
     }
 }
