@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using watchdogplatform.core.Models;
+using watchdogplatform.entityframework;
 
 namespace watchdogplatform.core.Managers
 {
     public class HealthManager
     {
+        private readonly WatchDogPlatformDbContext _dbContext;
+        private readonly ILogger<HealthManager> _log;
+
+        public HealthManager(WatchDogPlatformDbContext dbContext, ILogger<HealthManager> log)
+        {
+            _dbContext = dbContext;
+            _log = log;
+        }
+
         public ApplicationHealth Get(Assembly versionedAssembly)
         {
             var dependencyStatus = GetDependencyStatus();
@@ -32,7 +43,25 @@ namespace watchdogplatform.core.Managers
 
         private Dictionary<string, bool> GetDependencyStatus()
         {
-            return new Dictionary<string, bool>();
+            return new Dictionary<string, bool>
+            {
+                {"database",IsDatabaseHealthy()}
+            };
+        }
+
+        private bool IsDatabaseHealthy()
+        {
+            try
+            {
+                var item = _dbContext.Organizations.FirstOrDefault();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _log.LogError(e,e.Message);
+                return false;
+            }
+            
         }
     }
 }

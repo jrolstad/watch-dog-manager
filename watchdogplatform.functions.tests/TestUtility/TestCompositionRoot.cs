@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using watchdogplatform.core.Managers;
 using watchdogplatform.core.Repositories;
 using watchdogplatform.entityframework;
 using watchdogplatform.functions.Application;
@@ -51,6 +52,7 @@ namespace watchdogplatform.functions.tests.TestUtility
 
             serviceCollection.ReplaceSingleton<ILogger<VolunteerRepository>, FakeLogger<VolunteerRepository>>();
             serviceCollection.ReplaceSingleton<ILogger<OrganizationRepository>, FakeLogger<OrganizationRepository>>();
+            serviceCollection.ReplaceSingleton<ILogger<HealthManager>, FakeLogger<HealthManager>>();
 
             serviceCollection.ReplaceTransient(context =>
             {

@@ -28,6 +28,7 @@ namespace watchdogplatform.functions.tests
             Assert.InRange(healthResult.CurrentDateTime, DateTime.Today, DateTime.Today.AddDays(1));
 
             Assert.True(healthResult.Status);
+            Assert.NotEmpty(healthResult.DependencyStatus);
         }
     }
 }
