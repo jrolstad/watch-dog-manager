@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using watchdogplatform.core.Models;
 
 namespace watchdogplatform.core.Managers
@@ -15,7 +14,7 @@ namespace watchdogplatform.core.Managers
             _currentPrincipal = currentPrincipal;
         }
 
-        public async Task<User> GetCurrent()
+        public User GetCurrent()
         {
             var user = Map(_currentPrincipal);
             return user;

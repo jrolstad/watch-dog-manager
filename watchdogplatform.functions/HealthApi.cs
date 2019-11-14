@@ -8,21 +8,21 @@ using watchdogplatform.core.Managers;
 
 namespace watchdogplatform.functions
 {
-    public class UserApi
+    public class HealthApi
     {
-        private readonly UserManager _manager;
+        private readonly HealthManager _manager;
 
-        public UserApi(UserManager manager)
+        public HealthApi(HealthManager manager)
         {
             _manager = manager;
         }
 
-        [FunctionName("api-user")]
+        [FunctionName("api-health")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "user")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "health")] HttpRequest req,
             ILogger log)
         {
-            var result = _manager.GetCurrent();
+            var result = _manager.Get(this.GetType().Assembly);
 
             return new OkObjectResult(result);
         }

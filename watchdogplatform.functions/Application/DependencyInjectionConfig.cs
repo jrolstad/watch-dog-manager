@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using watchdogplatform.core.Managers;
-using watchdogplatform.core.Models;
 using watchdogplatform.core.Repositories;
 
 namespace watchdogplatform.functions.Application
@@ -14,6 +13,8 @@ namespace watchdogplatform.functions.Application
 
             builderServices.AddTransient<VolunteerManager>();
             builderServices.AddTransient<VolunteerRepository>();
+
+            builderServices.AddTransient<HealthManager>();
 
             builderServices.AddTransient(c =>
             {
