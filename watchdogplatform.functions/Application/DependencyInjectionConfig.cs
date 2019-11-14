@@ -19,7 +19,7 @@ namespace watchdogplatform.functions.Application
             builderServices.AddTransient(c =>
             {
                 var context = c.GetService<IHttpContextAccessor>();
-                var principal = context.HttpContext.User;
+                var principal = context?.HttpContext?.User;
                 return new UserManager(principal);
             });
 
