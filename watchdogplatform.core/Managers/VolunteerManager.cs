@@ -18,5 +18,10 @@ namespace watchdogplatform.core.Managers
         {
             return await _repository.Get();
         }
+
+        public async Task<Volunteer> Save(Volunteer volunteerData)
+        {
+            return await _repository.Save(volunteerData);
+        }
     }
 }

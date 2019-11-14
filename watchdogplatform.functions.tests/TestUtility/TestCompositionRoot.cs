@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using watchdogplatform.core.Repositories;
 using watchdogplatform.functions.Application;
 using watchdogplatform.functions.tests.TestUtility.Extensions;
@@ -54,9 +55,20 @@ namespace watchdogplatform.functions.tests.TestUtility
             return new FakeLogger<object>(this.Context);
         }
 
-        public HttpRequest HttpRequest()
+        public HttpRequest GetRequest()
         {
-            return new DefaultHttpRequest(new DefaultHttpContext());
+            var request = new DefaultHttpRequest(new DefaultHttpContext()) {Method = "GET"};
+            return request;
+        }
+
+        public HttpRequest PostRequest<T>(T body)
+        {
+            var request = new DefaultHttpRequest(new DefaultHttpContext()) {Method = "POST"};
+            var bodyAsJson = JsonConvert.SerializeObject(body);
+            request.Body = bodyAsJson.ToStream();
+
+            return request;
+
         }
     }
 

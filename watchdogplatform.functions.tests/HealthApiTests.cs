@@ -19,7 +19,7 @@ namespace watchdogplatform.functions.tests
             var api = root.Get<HealthApi>();
 
             // When
-            var result = await api.Run(root.HttpRequest(), root.CoreLogger());
+            var result = await api.Run(root.GetRequest(), root.CoreLogger());
 
             // Then
             var healthResult = result.AssertIsOkResultWithValue<ApplicationHealth>();
