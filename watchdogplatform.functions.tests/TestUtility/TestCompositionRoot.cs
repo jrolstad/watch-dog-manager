@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +62,7 @@ namespace watchdogplatform.functions.tests.TestUtility
 
     public class TestContext
     {
-        public ClaimsPrincipal CurrentPrincipal { get; set; }
+        public ClaimsPrincipal CurrentPrincipal;
+        public List<LoggedMessage> LoggedMessages = new List<LoggedMessage>();
     }
 }

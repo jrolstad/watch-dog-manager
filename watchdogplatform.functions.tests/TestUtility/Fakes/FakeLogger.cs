@@ -15,7 +15,14 @@ namespace watchdogplatform.functions.tests.TestUtility.Fakes
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            
+            var message = new LoggedMessage
+            {
+                Exception = exception,
+                Level = logLevel,
+                Message = formatter(state, exception)
+            };
+
+            _context.LoggedMessages.Add(message);
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -27,12 +34,23 @@ namespace watchdogplatform.functions.tests.TestUtility.Fakes
         {
             return new DisposableObject();
         }
-    }
 
-    public class DisposableObject : IDisposable
-    {
-        public void Dispose()
+        private class DisposableObject : IDisposable
         {
+            public void Dispose()
+            {
+            }
         }
     }
+
+    public class LoggedMessage
+    {
+        public Exception Exception { get; set; }
+        public LogLevel Level { get; set; }
+        public string Message { get; set; }
+    }
+
+    
+
+
 }
