@@ -1,0 +1,16 @@
+﻿@page "/user"
+
+@using watchdogplatform.blazor.Application.ViewModels
+
+@inject UserViewModel ViewModel
+
+<h1>User Details</h1>
+<p>UserName: @ViewModel.Name</p>
+
+@code {
+    
+    protected override async Task OnInitializedAsync()
+    {
+        ViewModel.Load();
+    }
+}
