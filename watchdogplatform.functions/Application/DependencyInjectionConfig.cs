@@ -14,9 +14,6 @@ namespace watchdogplatform.functions.Application
         {
             builderServices.AddHttpContextAccessor();
 
-            builderServices.AddTransient<VolunteerManager>();
-            builderServices.AddTransient<VolunteerRepository>();
-
             builderServices.AddTransient<HealthManager>();
 
             builderServices.AddTransient<OrganizationManager>();

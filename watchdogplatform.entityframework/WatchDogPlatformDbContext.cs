@@ -12,6 +12,5 @@ namespace watchdogplatform.entityframework
         }
 
         public virtual DbSet<Organization> Organizations { get; set; }
-        public virtual DbSet<Volunteer> Volunteers { get; set; }
     }
 }

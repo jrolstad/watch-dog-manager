@@ -42,7 +42,6 @@ namespace watchdogplatform.functions.tests.TestUtility
         {
             serviceCollection.AddTransient<HealthApi>();
             serviceCollection.AddTransient<UserApi>();
-            serviceCollection.AddTransient<VolunteerApi>();
             serviceCollection.AddTransient<OrganizationApi>();
         }
         private void RegisterFakes(IServiceCollection serviceCollection)
@@ -50,7 +49,6 @@ namespace watchdogplatform.functions.tests.TestUtility
             serviceCollection.AddSingleton<TestContext>();
             serviceCollection.ReplaceTransient<IHttpContextAccessor, FakeHttpContextAccessor>();
 
-            serviceCollection.ReplaceSingleton<ILogger<VolunteerRepository>, FakeLogger<VolunteerRepository>>();
             serviceCollection.ReplaceSingleton<ILogger<OrganizationRepository>, FakeLogger<OrganizationRepository>>();
             serviceCollection.ReplaceSingleton<ILogger<HealthManager>, FakeLogger<HealthManager>>();
 

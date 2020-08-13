@@ -57,8 +57,7 @@ namespace watchdogplatform.core.Repositories
             var domain = new Organization
             {
                 Id = toMap.Id,
-                Name = toMap.Name,
-                AffiliatedWith = toMap.AffiliatedWith
+                Name = toMap.Name
             };
 
             return domain;
@@ -69,8 +68,7 @@ namespace watchdogplatform.core.Repositories
             var dataModel = new entityframework.Models.Organization
             {
                 Id = toMap.Id,
-                Name = toMap.Name,
-                AffiliatedWith = toMap.AffiliatedWith
+                Name = toMap.Name
             };
 
             return dataModel;
@@ -79,8 +77,6 @@ namespace watchdogplatform.core.Repositories
         private static void UpdateDataModel(entityframework.Models.Organization toUpdate, Organization source)
         {
             toUpdate.Name = source.Name;
-            toUpdate.AffiliatedWith = source.AffiliatedWith;
-            
         }
     }
 }
