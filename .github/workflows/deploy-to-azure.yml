@@ -1,0 +1,46 @@
+name: Deploy to Azure
+
+on:
+  workflow_run:
+    workflows: ["CI Build"]
+    branches: [master]
+    types: 
+      - completed
+      
+jobs:
+  build-and-deploy:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+        
+    - name: Install dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore --output ./to-publish
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Azure Functions Action
+      uses: Azure/functions-action@v1.1.5
+      with:
+        # Name of the Azure Function App
+        app-name: watchdog-manager
+        # Path to package or folder. *.zip or a folder to deploy
+        package: ./to-publish
+        # Function app slot to be deploy to
+        #slot-name: # optional
+    
+    - name: logout
+      run: |
+        az logout
+      
