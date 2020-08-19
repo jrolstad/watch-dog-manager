@@ -19,7 +19,7 @@ namespace watchdogplatform.functions
 
         [FunctionName("api-health")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "health")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "health")] HttpRequest req,
             ILogger log)
         {
             var result = _manager.Get(this.GetType().Assembly);
