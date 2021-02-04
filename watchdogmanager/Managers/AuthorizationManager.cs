@@ -14,7 +14,15 @@ namespace watchdogmanager.Managers
         {
             _configuration = configuration;
         }
+
         public bool CanManageOrganizations(IPrincipal user)
+        {
+            if (IsDevelopment()) return true;
+
+            return user.Identity?.IsAuthenticated ?? false;
+        }
+
+        public bool CanManageVolunteers(IPrincipal user, string organizationId)
         {
             if (IsDevelopment()) return true;
 
