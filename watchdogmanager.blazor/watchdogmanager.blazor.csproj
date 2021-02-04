@@ -14,4 +14,10 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Pages\Organizations - Copy.razor.cs">
+      <DependentUpon>Organizations.razor.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

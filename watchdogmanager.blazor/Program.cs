@@ -1,13 +1,7 @@
-using MatBlazor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using watchdogmanager.blazor.Configuration;
 
 namespace watchdogmanager.blazor
 {
@@ -17,20 +11,11 @@ namespace watchdogmanager.blazor
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
+
             builder.Logging.SetMinimumLevel(LogLevel.Warning);
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddAuthorizationCore();
-
-            builder.Services.AddMsalAuthentication(options =>
-            {
-                builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-                options.ProviderOptions.DefaultAccessTokenScopes.Add("https://graph.microsoft.com/User.Read");
-
-                options.ProviderOptions.LoginMode = "redirect";
-            });
-
-            builder.Services.AddMatBlazor();
+            DependencyInjectionConfig.Register(builder.Services, builder.Configuration, builder.HostEnvironment.BaseAddress);
+            AuthenticationConfig.Register(builder.Services, builder.Configuration);
 
             await builder.Build().RunAsync();
         }

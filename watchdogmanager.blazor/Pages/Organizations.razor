@@ -1,4 +1,16 @@
 ﻿@page "/organizations"
 <h2 class="mat-h2">Organizations</h2>
 
+<MatButton Raised="true" OnClick="OpenNewDialog">New Organization</MatButton>
 <watchdogmanager.blazor.Components.Organizations.OrganizationGrid Data="Data" />
+
+<MatDialog @bind-IsOpen="@DialogIsOpen">
+    <MatDialogTitle>New Organization </MatDialogTitle>
+    <MatDialogContent>
+        <watchdogmanager.blazor.Components.Organizations.OrganizationDetail Data="SelectedOrganization"/>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="CancelClick">Cancel</MatButton>
+        <MatButton OnClick="SaveClick">Save</MatButton>
+    </MatDialogActions>
+</MatDialog>
