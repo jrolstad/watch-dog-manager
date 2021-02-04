@@ -36,6 +36,13 @@ namespace watchdogmanager.Managers
             return user.Identity?.IsAuthenticated ?? false;
         }
 
+        public bool CanManageScheduleTemplates(IPrincipal user, string organizationId)
+        {
+            if (IsDevelopment()) return true;
+
+            return user.Identity?.IsAuthenticated ?? false;
+        }
+
         private bool IsDevelopment()
         {
             return string.Equals("Development", EnvironmentName());
