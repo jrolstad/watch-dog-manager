@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "watchdogplatform.functions": {
-      "commandName": "Executable",
-      "executablePath": "C:\\code\\github\\jrolstad\\watch-dog-manager\\runtime\\3.0.1740\\func.exe",
-      "commandLineArgs": "start"
-    }
-  }
-}
