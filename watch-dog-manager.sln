@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogmanager.functions",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogmanager", "watchdogmanager\watchdogmanager.csproj", "{79ACEE97-818D-4CAA-A934-CC3EF1999CB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogmanager.blazor", "watchdogmanager.blazor\watchdogmanager.blazor.csproj", "{FC6FDFB6-74AD-4F5C-9352-782BECB2BE5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{79ACEE97-818D-4CAA-A934-CC3EF1999CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79ACEE97-818D-4CAA-A934-CC3EF1999CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79ACEE97-818D-4CAA-A934-CC3EF1999CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6FDFB6-74AD-4F5C-9352-782BECB2BE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6FDFB6-74AD-4F5C-9352-782BECB2BE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6FDFB6-74AD-4F5C-9352-782BECB2BE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6FDFB6-74AD-4F5C-9352-782BECB2BE5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
