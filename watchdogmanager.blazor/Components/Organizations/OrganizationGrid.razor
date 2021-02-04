@@ -1,0 +1,12 @@
+﻿<MatTable Items="@Data" class="mat-elevation-z5" ShowPaging="false" UseSortHeaderRow="true">
+    <MatTableHeader>
+        <MatSortHeaderRow SortChanged="@SortData">
+            <MatSortHeader SortId="id">Id</MatSortHeader>
+            <MatSortHeader SortId="name">Name</MatSortHeader>
+        </MatSortHeaderRow>
+    </MatTableHeader>
+    <MatTableRow>
+        <td>@context.Id</td>
+        <td>@context.Name</td>
+    </MatTableRow>
+</MatTable>
