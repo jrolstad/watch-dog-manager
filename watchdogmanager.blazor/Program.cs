@@ -1,3 +1,4 @@
+using MatBlazor;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,8 @@ namespace watchdogmanager.blazor
             {
                 builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
             });
+
+            builder.Services.AddMatBlazor();
 
             await builder.Build().RunAsync();
         }
