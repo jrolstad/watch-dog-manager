@@ -1,18 +1,41 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="top-row px-4 auth">
-            <LoginDisplay />
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <div class="content px-4">
+    <MatAppBarContainer>
+        <MatAppBar Fixed="true">
+            <MatAppBarRow>
+                <MatAppBarSection>
+                    <MatIconButton Icon="menu" OnClick="@((e) => MenuButtonClicked())"></MatIconButton>
+                    <MatAppBarTitle>Watch Dog Manager</MatAppBarTitle>
+                </MatAppBarSection>
+                <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                    <LoginDisplay />
+                </MatAppBarSection>
+            </MatAppBarRow>
+        </MatAppBar>
+        <MatAppBarContent>
             @Body
-        </div>
-    </div>
+        </MatAppBarContent>
+    </MatAppBarContainer>
+
+
+
 </div>
+
+@code{
+    private bool _navMenuOpened { get; set; }
+
+    protected void ModelDrawerHiddenChanged(bool hidden)
+    {
+        if (!hidden)
+        {
+            _navMenuOpened = false;
+        }
+    }
+
+    void MenuButtonClicked()
+    {
+        _navMenuOpened = !_navMenuOpened;
+        this.StateHasChanged();
+    }
+}

@@ -6,18 +6,9 @@
 
 <AuthorizeView>
     <Authorized>
-        Hello, @context.User.Identity.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginLogout">Log out</button>
+        <MatFAB Icon="account_circle" Label="@context.User.Identity.Name"></MatFAB>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/login">Log in</a>
+        <MatIconButton Icon="account_circle" Link="authentication/login"></MatIconButton>
     </NotAuthorized>
 </AuthorizeView>
-
-@code{
-    private async Task BeginLogout(MouseEventArgs args)
-    {
-        await SignOutManager.SetSignOutState();
-        Navigation.NavigateTo("authentication/logout");
-    }
-}
