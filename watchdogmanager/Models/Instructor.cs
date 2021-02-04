@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace watchdogmanager.Models
@@ -16,4 +15,6 @@ namespace watchdogmanager.Models
         public string Area { get; set; }
         public string OrganizationId { get; set; }
     }
+
+   
 }

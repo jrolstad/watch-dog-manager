@@ -24,12 +24,14 @@ namespace watchdogmanager.functions.Configuration
 
             services.AddTransient<AuthorizationManager>();
             services.AddTransient<InstructorManager>();
+            services.AddTransient<InstructorAvailabilityManager>();
             services.AddTransient<OrganizationManager>();
             services.AddTransient<OrganizationManager>();
             services.AddTransient<ScheduleTemplateManager>();
             services.AddTransient<VolunteerManager>();
 
             services.AddTransient<InstructorRepository>();
+            services.AddTransient<InstructorAvailabilityRepository>();
             services.AddTransient<OrganizationRepository>();
             services.AddTransient<ScheduleTemplateRepository>();
             services.AddTransient<VolunteerRepository>();
