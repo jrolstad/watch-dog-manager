@@ -1,41 +1,48 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <MatAppBarContainer>
-        <MatAppBar Fixed="true">
-            <MatAppBarRow>
-                <MatAppBarSection>
-                    <MatIconButton Icon="menu" OnClick="@((e) => MenuButtonClicked())"></MatIconButton>
-                    <MatAppBarTitle>Watch Dog Manager</MatAppBarTitle>
-                </MatAppBarSection>
-                <MatAppBarSection Align="@MatAppBarSectionAlign.End">
-                    <LoginDisplay />
-                </MatAppBarSection>
-            </MatAppBarRow>
-        </MatAppBar>
-        <MatAppBarContent>
+
+<MatAnchorUtils></MatAnchorUtils>
+<MatAppBar Style="z-index: 100;" Class="mat">
+    <MatAppBarRow>
+        <MatAppBarSection>
+            <MatIconButton Icon="menu" OnClick="@((e) => MenuButtonClicked())"></MatIconButton>
+            <MatHidden BreakPoint="@MatBreakpoint.XS" Direction="@MatHiddenDirection.Down">
+                <MatAppBarTitle>Watch DOGS Manager</MatAppBarTitle>
+            </MatHidden>
+            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                <LoginDisplay />
+            </MatAppBarSection>
+        </MatAppBarSection>
+    </MatAppBarRow>
+</MatAppBar>
+
+<MatDrawerContainer Style="width: 100vw; height: 100vh;" Class="mat">
+    <AuthorizeView>
+        <Authorized>
+            <MatHidden Breakpoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up" HiddenChanged="@ModelDrawerHiddenChanged">
+                <ChildContent>
+                    <MatDrawer @bind-Opened="@_navMenuOpened" Mode="@MatDrawerMode.Modal">
+                        <MatAppBarAdjust></MatAppBarAdjust>
+                        <NavMenu/>
+                    </MatDrawer>
+                </ChildContent>
+                <ElseContent>
+                    <MatDrawer @bind-Opened="@_navMenuOpened" Mode="@MatDrawerMode.Dismissible">
+                        <MatAppBarAdjust></MatAppBarAdjust>
+                        <NavMenu />
+                    </MatDrawer>
+                </ElseContent>
+            </MatHidden>
+        </Authorized>
+    </AuthorizeView>
+
+    <MatDrawerContent Class="mdc-theme--background">
+        <MatAppBarAdjust></MatAppBarAdjust>
+        <div class="body-wrapper">
             @Body
-        </MatAppBarContent>
-    </MatAppBarContainer>
+        </div>
+    </MatDrawerContent>
 
+</MatDrawerContainer>
 
-
-</div>
-
-@code{
-    private bool _navMenuOpened { get; set; }
-
-    protected void ModelDrawerHiddenChanged(bool hidden)
-    {
-        if (!hidden)
-        {
-            _navMenuOpened = false;
-        }
-    }
-
-    void MenuButtonClicked()
-    {
-        _navMenuOpened = !_navMenuOpened;
-        this.StateHasChanged();
-    }
-}
+<MatPortalHost></MatPortalHost>
