@@ -23,9 +23,11 @@ namespace watchdogmanager.functions.Configuration
             services.AddTransient<ICosmosClientFactory, CosmosClientFactory>();
 
             services.AddTransient<AuthorizationManager>();
+            services.AddTransient<InstructorManager>();
             services.AddTransient<OrganizationManager>();
             services.AddTransient<VolunteerManager>();
 
+            services.AddTransient<InstructorRepository>();
             services.AddTransient<OrganizationRepository>();
             services.AddTransient<VolunteerRepository>();
 

@@ -21,11 +21,11 @@ namespace watchdogmanager.Repositories
             _cosmosDbService = cosmosDbService;
         }
 
-        public ICollection<Organization> Get()
+        public IEnumerable<Organization> Get()
         {
             var results = _cosmosDbService.Read<Organization>(DatabaseId, CollectionId);
 
-            return results.ToList();
+            return results;
         }
 
         public Task<Organization> Get(string id)

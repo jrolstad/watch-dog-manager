@@ -29,6 +29,13 @@ namespace watchdogmanager.Managers
             return user.Identity?.IsAuthenticated ?? false;
         }
 
+        public bool CanManageInstructors(IPrincipal user, string organizationId)
+        {
+            if (IsDevelopment()) return true;
+
+            return user.Identity?.IsAuthenticated ?? false;
+        }
+
         private bool IsDevelopment()
         {
             return string.Equals("Development", EnvironmentName());
