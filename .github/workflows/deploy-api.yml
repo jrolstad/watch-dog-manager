@@ -2,7 +2,7 @@ name: Deploy to Azure
 
 on:
   workflow_run:
-    workflows: ["CI Build"]
+    workflows: ["CI Build (All)"]
     branches: ['**']
     types: 
       - completed
