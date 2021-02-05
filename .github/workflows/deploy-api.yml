@@ -29,7 +29,7 @@ jobs:
       run: dotnet restore ./watchdogmanager.functions
       
     - name: Build
-      run: dotnet build ./watchdogmanager.functions --configuration Release --no-restore --output ./to-publish
+      run: dotnet build ./watchdogmanager.functions --configuration Release --no-restore
       
     - name: Test
       run: dotnet test ./watchdogmanager.functions --no-restore --verbosity normal
@@ -38,6 +38,6 @@ jobs:
       uses: Azure/functions-action@v1
       with:
         app-name: watchdogmanager-api
-        package: ./to-publish
+        package: watchdogmanager.functions/bin/Release/netcoreapp3.1
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
       
