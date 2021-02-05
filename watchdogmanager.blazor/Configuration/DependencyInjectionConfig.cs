@@ -23,12 +23,14 @@ namespace watchdogmanager.blazor.Configuration
 
             services.AddTransient<IApiService<Organization>, ApiService<Organization>>();
             services.AddTransient<IApiService<Volunteer>, ApiService<Volunteer>>();
+            services.AddTransient<IApiService<Instructor>, ApiService<Instructor>>();
 
-            services.AddSingleton<AppState>(provider => 
+            services.AddSingleton(provider => 
             {
                 var apiService = provider.GetService<IApiService<Organization>>();
                 var state = new AppState(apiService);
-                state.Initialize();
+                state.InitializationTask = state.Initialize();
+
                 return state;
             });
         }

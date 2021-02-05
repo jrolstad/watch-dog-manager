@@ -11,12 +11,15 @@ namespace watchdogmanager.blazor.Pages
     public partial class Volunteers
     {
         [Inject]
-        public IApiService<Volunteer> ApiService { get; set; }
+        public IApiService<Volunteer> VolunteerApiService { get; set; }
+        [Inject]
+        public IApiService<Instructor> InstructorApiService { get; set; }
 
         [Inject]
         public AppState AppState { get; set; }
 
         public List<Volunteer> Data { get; set; }
+        public List<Instructor> AvailableInstructors { get; set; }
 
         public Volunteer SelectedItem { get; set; }
 
@@ -24,6 +27,10 @@ namespace watchdogmanager.blazor.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            if(!AppState.InitializationTask.IsCompleted)
+            {
+                await AppState.InitializationTask;
+            }
             await RefreshData();
         }
 
@@ -38,7 +45,7 @@ namespace watchdogmanager.blazor.Pages
             DialogIsOpen = false;
 
             ResetData();
-            await ApiService.Save(SelectedItem, AppState.CurrentOrganization.Id);
+            await VolunteerApiService.Save(SelectedItem, AppState.CurrentOrganization.Id);
             await RefreshData();
         }
         async Task CancelClick()
@@ -59,7 +66,7 @@ namespace watchdogmanager.blazor.Pages
             if (SelectedItem != null)
             {
                 ResetData();
-                await ApiService.Delete(SelectedItem.Id, AppState.CurrentOrganization.Id);
+                await VolunteerApiService.Delete(SelectedItem.Id, AppState.CurrentOrganization.Id);
                 await RefreshData();
             }
         }
@@ -75,7 +82,8 @@ namespace watchdogmanager.blazor.Pages
 
         async Task RefreshData()
         {
-            Data = await ApiService.Get(AppState.CurrentOrganization.Id);
+            Data = await VolunteerApiService.Get(AppState.CurrentOrganization.Id);
+            AvailableInstructors = await InstructorApiService.Get(AppState.CurrentOrganization.Id);
             StateHasChanged();
         }
 

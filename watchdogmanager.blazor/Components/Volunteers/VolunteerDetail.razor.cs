@@ -13,6 +13,9 @@ namespace watchdogmanager.blazor.Components.Volunteers
         [Parameter]
         public Volunteer Data { get; set; }
 
+        [Parameter]
+        public List<Instructor> AvailableInstructors { get; set; }
+
         GenericCommand<Student> DeleteStudentCommand { get; set; }
 
         protected override void OnInitialized()
@@ -32,7 +35,7 @@ namespace watchdogmanager.blazor.Components.Volunteers
         private void AddStudent()
         {
             if (Data?.Students == null) Data.Students = new List<Student>();
-            Data.Students.Add(new Student());
+            Data.Students.Add(new Student { InstructorId = "" });
         }
 
         private async Task DeleteStudent(Student student)

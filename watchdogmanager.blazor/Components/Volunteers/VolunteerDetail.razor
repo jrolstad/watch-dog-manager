@@ -19,7 +19,11 @@ else
                     <MatTextField @bind-Value="@item.Name" Label="Name" FullWidth="true"></MatTextField>
                 </div>
                 <div class="mat-layout-grid-cell mat-layout-grid-cell-span-5">
-                    <MatTextField @bind-Value="@item.InstructorId" Label="Instructor" FullWidth="true"></MatTextField>
+                    <MatSelectValue @bind-Value="@item.InstructorId" Items="AvailableInstructors" ValueSelector="@(i=>i.Id)">
+                        <ItemTemplate>
+                            @context.LastName
+                        </ItemTemplate>
+                    </MatSelectValue>
                 </div>
                 <div class="mat-layout-grid-cell mat-layout-grid-cell-span-2">
                     <MatButton Icon="delete" Command="DeleteStudentCommand" CommandParameter="@item"></MatButton>

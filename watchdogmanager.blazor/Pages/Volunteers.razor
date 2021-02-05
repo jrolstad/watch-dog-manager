@@ -3,13 +3,13 @@
 
 <MatButton Raised="true" OnClick="OpenNewDialog">Add Volunteer</MatButton>
 <br />
-<watchdogmanager.blazor.Components.Volunteers.VolunteerGrid Data="Data" OnEdit="OnEdit" OnDelete="OnDelete" />
+<watchdogmanager.blazor.Components.Volunteers.VolunteerGrid Data="Data"  OnEdit="OnEdit" OnDelete="OnDelete" />
 
 <MatDialog @bind-IsOpen="@DialogIsOpen">
     <MatDialogTitle>Details</MatDialogTitle>
     <MatDialogContent>
         <div style="min-width:300px">
-            <watchdogmanager.blazor.Components.Volunteers.VolunteerDetail Data="SelectedItem" />
+            <watchdogmanager.blazor.Components.Volunteers.VolunteerDetail Data="SelectedItem" AvailableInstructors="AvailableInstructors" />
         </div>
     </MatDialogContent>
     <MatDialogActions>
