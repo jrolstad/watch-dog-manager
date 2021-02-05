@@ -1,5 +1,6 @@
 ﻿using MatBlazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,21 @@ namespace watchdogmanager.blazor.Components.Organizations
     {
         [Parameter]
         public List<Organization> Data { get; set; }
+
+        [Parameter]
+        public Func<string, Task> OnEdit { get; set; }
+
+        [Parameter]
+        public Func<string, Task> OnDelete { get; set; }
+
+        GenericCommand EditCommand { get; set; }
+        GenericCommand DeleteCommand { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            EditCommand = new GenericCommand(OnEdit);
+            DeleteCommand = new GenericCommand(OnDelete);
+        }
 
         void SortData(MatSortChangedEvent sort)
         {
@@ -37,5 +53,8 @@ namespace watchdogmanager.blazor.Components.Organizations
                 }
             }
         }
+
+        
+  
     }
 }

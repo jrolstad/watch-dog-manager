@@ -12,6 +12,7 @@ namespace watchdogmanager.blazor.Services
     {
         Task<List<Organization>> GetOrganizations();
         Task SaveOrganization(Organization toSave);
+        Task DeleteOrganization(string id);
     }
 
     public class ApiService:IApiService
@@ -46,6 +47,14 @@ namespace watchdogmanager.blazor.Services
                 var result = await client.PutAsJsonAsync($"organization/{toSave.Id}", toSave);
                 result.EnsureSuccessStatusCode();
             }
+        }
+
+        public async Task DeleteOrganization(string id)
+        {
+            var client = _httpClientFactory.CreateClient("Api");
+
+            var result = await client.DeleteAsync($"organization/{id}");
+            result.EnsureSuccessStatusCode();
         }
     }
 }

@@ -2,12 +2,13 @@
 <h2 class="mat-h2">Organizations</h2>
 
 <MatButton Raised="true" OnClick="OpenNewDialog">New Organization</MatButton>
-<watchdogmanager.blazor.Components.Organizations.OrganizationGrid Data="Data" />
+<br/>
+<watchdogmanager.blazor.Components.Organizations.OrganizationGrid Data="Data" OnEdit="OnEdit" OnDelete="OnDelete" />
 
 <MatDialog @bind-IsOpen="@DialogIsOpen">
     <MatDialogTitle>New Organization </MatDialogTitle>
     <MatDialogContent>
-        <watchdogmanager.blazor.Components.Organizations.OrganizationDetail Data="SelectedOrganization"/>
+        <watchdogmanager.blazor.Components.Organizations.OrganizationDetail Data="SelectedItem"/>
     </MatDialogContent>
     <MatDialogActions>
         <MatButton OnClick="CancelClick">Cancel</MatButton>

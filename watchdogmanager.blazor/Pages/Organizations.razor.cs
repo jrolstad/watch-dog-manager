@@ -14,7 +14,7 @@ namespace watchdogmanager.blazor.Pages
         public IApiService ApiService {get;set;}
 
         public List<Organization> Data { get; set; }
-        public Organization SelectedOrganization { get; set; }
+        public Organization SelectedItem { get; set; }
 
         private bool DialogIsOpen = false;
 
@@ -25,27 +25,60 @@ namespace watchdogmanager.blazor.Pages
 
         void OpenNewDialog()
         {
-            SelectedOrganization = new Organization();
-            DialogIsOpen = true;
+            SelectedItem = new Organization();
+            ShowSelectedItem();
         }
 
         async Task SaveClick()
         {
             DialogIsOpen = false;
 
-            Data = null;
-            await ApiService.SaveOrganization(SelectedOrganization);
+            ResetData();
+            await ApiService.SaveOrganization(SelectedItem);
             await RefreshData();
         }
         async Task CancelClick()
         {
-
             DialogIsOpen = false;
+        }
+
+
+        async Task OnEdit(string id)
+        {
+            SelectedItem = Data.FirstOrDefault(o => o.Id == id);
+            ShowSelectedItem();
+        }
+
+        async Task OnDelete(string id)
+        {
+            SelectedItem = Data.FirstOrDefault(o => o.Id == id);
+            if (SelectedItem != null)
+            {
+                ResetData();
+                await ApiService.DeleteOrganization(SelectedItem.Id);
+                await RefreshData();
+            }
+        }
+
+        void ShowSelectedItem()
+        {
+            if (SelectedItem != null)
+            {
+                DialogIsOpen = true;
+                StateHasChanged();
+            }
         }
 
         async Task RefreshData()
         {
             Data = await ApiService.GetOrganizations();
+            StateHasChanged();
+        }
+
+        void ResetData()
+        {
+            Data = null;
+            StateHasChanged();
         }
     }
 }
