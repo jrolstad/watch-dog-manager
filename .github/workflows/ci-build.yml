@@ -7,7 +7,7 @@ on:
     branches: '**' 
 
 jobs:
-  build:
+  build-functions:
 
     runs-on: windows-latest
 
@@ -30,3 +30,27 @@ jobs:
       
     - name: Test
       run: dotnet test ./watchdogmanager.functions --no-restore --verbosity normal
+
+  build-blazor:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    
+    - name: Clear Local Nuget Cache
+      run: dotnet nuget locals all --clear
+    
+    - name: Install dependencies
+      run: dotnet restore ./watchdogmanager.blazor
+      
+    - name: Build
+      run: dotnet build ./watchdogmanager.blazor --configuration Release --no-restore
+      
+    - name: Test
+      run: dotnet test ./watchdogmanager.blazor --no-restore --verbosity normal
