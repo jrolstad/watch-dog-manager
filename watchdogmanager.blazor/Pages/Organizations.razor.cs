@@ -12,6 +12,8 @@ namespace watchdogmanager.blazor.Pages
     {
         [Inject]
         public IApiService ApiService {get;set;}
+        [Inject]
+        public AppState AppState { get;set;}
 
         public List<Organization> Data { get; set; }
         public Organization SelectedItem { get; set; }

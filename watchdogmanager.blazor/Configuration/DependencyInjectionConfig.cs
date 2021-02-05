@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using watchdogmanager.blazor.Models;
 using watchdogmanager.blazor.Services;
 namespace watchdogmanager.blazor.Configuration
 {
@@ -21,6 +22,13 @@ namespace watchdogmanager.blazor.Configuration
             RegisterApiHttpClient(services, configuration);
 
             services.AddTransient<IApiService, ApiService>();
+            services.AddSingleton<AppState>(provider => 
+            {
+                var apiService = provider.GetService<IApiService>();
+                var state = new AppState(apiService);
+                state.Initialize();
+                return state;
+            });
         }
 
         private static void RegisterDefaultHttpClient(IServiceCollection services, string baseAddress)
