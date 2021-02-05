@@ -1,4 +1,4 @@
-name: CI Build (API)
+name: CI Build
 
 on:
   push:
