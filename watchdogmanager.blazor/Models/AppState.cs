@@ -8,9 +8,9 @@ namespace watchdogmanager.blazor.Models
 {
     public class AppState
     {
-        private readonly IApiService _apiService;
+        private readonly IApiService<Organization> _apiService;
 
-        public AppState(IApiService apiService)
+        public AppState(IApiService<Organization> apiService)
         {
             _apiService = apiService;
         }
@@ -20,7 +20,8 @@ namespace watchdogmanager.blazor.Models
 
         public async Task Initialize()
         {
-            Organizations = await _apiService.GetOrganizations();
+            Organizations = await _apiService.Get();
+            CurrentOrganization = Organizations.First();
         }
     }
 }

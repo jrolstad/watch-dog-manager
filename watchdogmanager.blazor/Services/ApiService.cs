@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -8,53 +6,65 @@ using watchdogmanager.blazor.Models;
 
 namespace watchdogmanager.blazor.Services
 {
-    public interface IApiService
+    public interface IApiService<T>
     {
-        Task<List<Organization>> GetOrganizations();
-        Task SaveOrganization(Organization toSave);
-        Task DeleteOrganization(string id);
+        Task<List<T>> Get(string organizationId=null);
+        Task Save(T toSave, string organizationId = null);
+        Task Delete(string id, string organizationId = null);
     }
 
-    public class ApiService:IApiService
+    public class ApiService<T>:IApiService<T>
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private string _resourcePath;
 
         public ApiService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
+            _resourcePath = typeof(T).Name.ToLower();
         }
 
-        public async Task<List<Organization>> GetOrganizations()
+        public async Task<List<T>> Get(string organizationId=null)
         {
             var client = _httpClientFactory.CreateClient("Api");
 
-            var data = await client.GetFromJsonAsync<List<Organization>>($"organization");
+            var data = await client.GetFromJsonAsync<List<T>>($"{GetBasePath(organizationId)}");
 
             return data;
         }
 
-        public async Task SaveOrganization(Organization toSave)
+        public async Task Save(T toSave, string organizationId = null)
         {
             var client = _httpClientFactory.CreateClient("Api");
+            var objectWithIdentity = toSave as IIdentifiable;
 
-            if (string.IsNullOrWhiteSpace(toSave.Id))
+            if (string.IsNullOrWhiteSpace(objectWithIdentity.Id))
             {
-                var result = await client.PostAsJsonAsync("organization", toSave);
+                var result = await client.PostAsJsonAsync($"{GetBasePath(organizationId)}", toSave);
                 result.EnsureSuccessStatusCode();
             }
             else
             {
-                var result = await client.PutAsJsonAsync($"organization/{toSave.Id}", toSave);
+                var result = await client.PutAsJsonAsync($"{GetBasePath(organizationId)}/{objectWithIdentity.Id}", toSave);
                 result.EnsureSuccessStatusCode();
             }
         }
 
-        public async Task DeleteOrganization(string id)
+        public async Task Delete(string id, string organizationId = null)
         {
             var client = _httpClientFactory.CreateClient("Api");
 
-            var result = await client.DeleteAsync($"organization/{id}");
+            var result = await client.DeleteAsync($"{GetBasePath(organizationId)}/{id}");
             result.EnsureSuccessStatusCode();
         }
+
+        private string GetBasePath(string organizationId)
+        {
+            if (string.IsNullOrWhiteSpace(organizationId)) return _resourcePath;
+
+            return $"{_resourcePath}/{organizationId}";
+        }
+
+        
     }
 }

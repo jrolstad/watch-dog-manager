@@ -8,8 +8,9 @@ else
         <MatTableHeader>
             <MatSortHeaderRow SortChanged="@SortData">
                 <MatSortHeader></MatSortHeader>
-                <MatSortHeader SortId="name">Name</MatSortHeader>
+                <MatSortHeader SortId="name"><span style="width:300px">Name</span></MatSortHeader>
                 <MatSortHeader SortId="name">Email</MatSortHeader>
+                <MatSortHeader SortId="name">Students</MatSortHeader>
             </MatSortHeaderRow>
         </MatTableHeader>
         <MatTableRow>
@@ -19,6 +20,7 @@ else
             </td>
             <td>@context.Name</td>
             <td>@context.Email</td>
+            <td>@GetStudentDisplay(context)</td>
         </MatTableRow>
     </MatTable>
 }

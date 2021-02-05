@@ -10,8 +10,7 @@ namespace watchdogmanager.blazor.Pages
 {
     public partial class ScheduleTemplates
     {
-        [Inject]
-        public IApiService ApiService { get; set; }
+
 
         [Inject]
         public AppState AppState { get; set; }

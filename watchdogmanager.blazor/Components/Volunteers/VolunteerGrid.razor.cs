@@ -53,5 +53,12 @@ namespace watchdogmanager.blazor.Components.Volunteers
                 }
             }
         }
+
+        private string GetStudentDisplay(Volunteer item)
+        {
+            if (item.Students == null) return "";
+
+            return string.Join(", ", item.Students?.Select(s => s.Name).OrderBy(n=>n));
+        }
     }
 }
