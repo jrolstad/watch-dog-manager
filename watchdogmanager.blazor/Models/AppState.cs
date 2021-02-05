@@ -26,5 +26,13 @@ namespace watchdogmanager.blazor.Models
             Organizations = await _apiService.Get();
             CurrentOrganization = Organizations.First();
         }
+
+        public async Task EnsureInitializationComplete()
+        {
+            if (!InitializationTask.IsCompleted)
+            {
+                await InitializationTask;
+            }
+        }
     }
 }

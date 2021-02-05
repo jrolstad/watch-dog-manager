@@ -22,6 +22,7 @@ namespace watchdogmanager.blazor.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            await AppState.EnsureInitializationComplete();
             await RefreshData();
         }
 
