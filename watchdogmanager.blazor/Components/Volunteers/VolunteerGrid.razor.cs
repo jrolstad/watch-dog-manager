@@ -20,13 +20,13 @@ namespace watchdogmanager.blazor.Components.Volunteers
         [Parameter]
         public Func<string, Task> OnDelete { get; set; }
 
-        GenericCommand EditCommand { get; set; }
-        GenericCommand DeleteCommand { get; set; }
+        GenericCommand<string> EditCommand { get; set; }
+        GenericCommand<string> DeleteCommand { get; set; }
 
         protected override void OnParametersSet()
         {
-            EditCommand = new GenericCommand(OnEdit);
-            DeleteCommand = new GenericCommand(OnDelete);
+            EditCommand = new GenericCommand<string>(OnEdit);
+            DeleteCommand = new GenericCommand<string>(OnDelete);
         }
 
         void SortData(MatSortChangedEvent sort)

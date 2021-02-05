@@ -4,13 +4,13 @@ using System.Windows.Input;
 
 namespace watchdogmanager.blazor.Components.Organizations
 {
-    public class GenericCommand : ICommand
+    public class GenericCommand<T> : ICommand
     {
-        private readonly Func<string,Task> _action;
+        private readonly Func<T,Task> _action;
 
         public event EventHandler CanExecuteChanged;
 
-        public GenericCommand(Func<string, Task> action)
+        public GenericCommand(Func<T, Task> action)
         {
             _action = action;
         }
@@ -22,7 +22,7 @@ namespace watchdogmanager.blazor.Components.Organizations
 
         public void Execute(object parameter)
         {
-            var input = parameter as string;
+            var input = (T)parameter;
 
             var task = _action(input);
             Task.WhenAll(task);
