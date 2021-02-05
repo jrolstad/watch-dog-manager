@@ -1,6 +1,8 @@
-name: Deploy to Azure
+name: Deploy API to Azure
 
 on:
+  push:
+    branches: '**'
   workflow_run:
     workflows: ["CI Build (All)"]
     branches: ['**']
