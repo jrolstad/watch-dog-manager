@@ -1,0 +1,6 @@
+﻿@page "/volunteers"
+<h2 class="mat-h2">Volunteers</h2>
+
+<MatButton Raised="true" OnClick="OpenNewDialog">Add Volunteer</MatButton>
+<br />
+<watchdogmanager.blazor.Components.Volunteers.VolunteerGrid Data="Data" OnEdit="OnEdit" OnDelete="OnDelete" />

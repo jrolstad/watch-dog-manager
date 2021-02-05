@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogmanager.functions", "watchdogmanager.functions\watchdogmanager.functions.csproj", "{C46EAEFC-C33C-4532-BDE3-5D68B6F8F67D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "watchdogmanager.functions", "watchdogmanager.functions\watchdogmanager.functions.csproj", "{C46EAEFC-C33C-4532-BDE3-5D68B6F8F67D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogmanager", "watchdogmanager\watchdogmanager.csproj", "{79ACEE97-818D-4CAA-A934-CC3EF1999CB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "watchdogmanager", "watchdogmanager\watchdogmanager.csproj", "{79ACEE97-818D-4CAA-A934-CC3EF1999CB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogmanager.blazor", "watchdogmanager.blazor\watchdogmanager.blazor.csproj", "{FC6FDFB6-74AD-4F5C-9352-782BECB2BE5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "watchdogmanager.blazor", "watchdogmanager.blazor\watchdogmanager.blazor.csproj", "{FC6FDFB6-74AD-4F5C-9352-782BECB2BE5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
