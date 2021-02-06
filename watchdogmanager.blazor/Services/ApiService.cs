@@ -26,7 +26,7 @@ namespace watchdogmanager.blazor.Services
 
         public async Task<List<T>> Get(string organizationId=null)
         {
-            var client = _httpClientFactory.CreateClient("Api");
+            var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
             var data = await client.GetFromJsonAsync<List<T>>($"{GetBasePath(organizationId)}");
 
@@ -35,7 +35,7 @@ namespace watchdogmanager.blazor.Services
 
         public async Task Save(T toSave, string organizationId = null)
         {
-            var client = _httpClientFactory.CreateClient("Api");
+            var client = _httpClientFactory.CreateClient("ApiAuthenticated");
             var objectWithIdentity = toSave as IIdentifiable;
 
             if (string.IsNullOrWhiteSpace(objectWithIdentity.Id))
@@ -52,7 +52,7 @@ namespace watchdogmanager.blazor.Services
 
         public async Task Delete(string id, string organizationId = null)
         {
-            var client = _httpClientFactory.CreateClient("Api");
+            var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
             var result = await client.DeleteAsync($"{GetBasePath(organizationId)}/{id}");
             result.EnsureSuccessStatusCode();
