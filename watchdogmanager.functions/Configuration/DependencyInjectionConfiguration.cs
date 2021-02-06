@@ -15,8 +15,6 @@ namespace watchdogmanager.functions.Configuration
     {
         public static void Configure(IServiceCollection services)
         {
-            services.AddAuthenticationCore();
-
             services.AddHttpClient();
             services.AddHttpContextAccessor();
 
