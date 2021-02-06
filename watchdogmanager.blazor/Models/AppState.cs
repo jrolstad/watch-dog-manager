@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -23,16 +24,13 @@ namespace watchdogmanager.blazor.Models
 
         public async Task Initialize()
         {
-            Organizations = await _apiService.Get();
-            CurrentOrganization = Organizations.First();
-        }
-
-        public async Task EnsureInitializationComplete()
-        {
-            if (!InitializationTask.IsCompleted)
+            if (CurrentOrganization==null)
             {
-                await InitializationTask;
+                Organizations = await _apiService.Get();
+                CurrentOrganization = Organizations.First();
             }
+            
         }
+ 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MatBlazor;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,14 +26,7 @@ namespace watchdogmanager.blazor.Configuration
             services.AddTransient<IApiService<Volunteer>, ApiService<Volunteer>>();
             services.AddTransient<IApiService<Instructor>, ApiService<Instructor>>();
 
-            services.AddSingleton(provider => 
-            {
-                var apiService = provider.GetService<IApiService<Organization>>();
-                var state = new AppState(apiService);
-                state.InitializationTask = state.Initialize();
-
-                return state;
-            });
+            services.AddSingleton<AppState>();
         }
 
         private static void RegisterDefaultHttpClient(IServiceCollection services, string baseAddress)
@@ -45,8 +39,6 @@ namespace watchdogmanager.blazor.Configuration
             var baseAddress = configuration["ApiBaseUri"];
             var permission = configuration["ApiPermission"];
 
-            services.AddHttpClient("Api", client =>
-                client.BaseAddress = new Uri(baseAddress));
 
             services.AddHttpClient("ApiAuthenticated", client =>
                client.BaseAddress = new Uri(baseAddress))
