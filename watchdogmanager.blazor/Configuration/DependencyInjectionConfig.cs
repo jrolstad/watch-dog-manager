@@ -22,9 +22,7 @@ namespace watchdogmanager.blazor.Configuration
             RegisterDefaultHttpClient(services, baseAddress);
             RegisterApiHttpClient(services, configuration);
 
-            services.AddTransient<IApiService<Organization>, ApiService<Organization>>();
-            services.AddTransient<IApiService<Volunteer>, ApiService<Volunteer>>();
-            services.AddTransient<IApiService<Instructor>, ApiService<Instructor>>();
+            services.AddTransient<IApiService, ApiService>();
 
             services.AddSingleton<AppState>();
         }

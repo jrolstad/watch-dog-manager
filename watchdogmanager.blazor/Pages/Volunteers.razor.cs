@@ -11,9 +11,7 @@ namespace watchdogmanager.blazor.Pages
     public partial class Volunteers
     {
         [Inject]
-        public IApiService<Volunteer> VolunteerApiService { get; set; }
-        [Inject]
-        public IApiService<Instructor> InstructorApiService { get; set; }
+        public IApiService ApiService { get; set; }
 
         [Inject]
         public AppState AppState { get; set; }
@@ -42,7 +40,7 @@ namespace watchdogmanager.blazor.Pages
             DialogIsOpen = false;
 
             ResetData();
-            await VolunteerApiService.Save(SelectedItem, AppState.CurrentOrganization.Id);
+            await ApiService.Save(SelectedItem, AppState.CurrentOrganization.Id);
             await RefreshData();
         }
         async Task CancelClick()
@@ -63,7 +61,7 @@ namespace watchdogmanager.blazor.Pages
             if (SelectedItem != null)
             {
                 ResetData();
-                await VolunteerApiService.Delete(SelectedItem.Id, AppState.CurrentOrganization.Id);
+                await ApiService.Delete<Volunteer>(SelectedItem.Id, AppState.CurrentOrganization.Id);
                 await RefreshData();
             }
         }
@@ -79,8 +77,8 @@ namespace watchdogmanager.blazor.Pages
 
         async Task RefreshData()
         {
-            Data = await VolunteerApiService.Get(AppState.CurrentOrganization.Id);
-            AvailableInstructors = await InstructorApiService.Get(AppState.CurrentOrganization.Id);
+            Data = await ApiService.Get<Volunteer>(AppState.CurrentOrganization.Id);
+            AvailableInstructors = await ApiService.Get<Instructor>(AppState.CurrentOrganization.Id);
             StateHasChanged();
         }
 

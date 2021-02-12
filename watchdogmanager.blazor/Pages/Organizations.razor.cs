@@ -11,7 +11,7 @@ namespace watchdogmanager.blazor.Pages
     public partial class Organizations
     {
         [Inject]
-        public IApiService<Organization> ApiService {get;set;}
+        public IApiService ApiService {get;set;}
         [Inject]
         public AppState AppState { get;set;}
 
@@ -58,7 +58,7 @@ namespace watchdogmanager.blazor.Pages
             if (SelectedItem != null)
             {
                 ResetData();
-                await ApiService.Delete(SelectedItem.Id);
+                await ApiService.Delete<Organization>(SelectedItem.Id);
                 await RefreshData();
             }
         }
@@ -74,7 +74,7 @@ namespace watchdogmanager.blazor.Pages
 
         async Task RefreshData()
         {
-            Data = await ApiService.Get();
+            Data = await ApiService.Get<Organization>();
             StateHasChanged();
         }
 

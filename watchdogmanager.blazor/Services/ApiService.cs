@@ -6,63 +6,62 @@ using watchdogmanager.blazor.Models;
 
 namespace watchdogmanager.blazor.Services
 {
-    public interface IApiService<T>
+    public interface IApiService
     {
-        Task<List<T>> Get(string organizationId=null);
-        Task Save(T toSave, string organizationId = null);
-        Task Delete(string id, string organizationId = null);
+        Task<List<T>> Get<T>(string organizationId=null);
+        Task Save<T>(T toSave, string organizationId = null);
+        Task Delete<T>(string id, string organizationId = null);
     }
 
-    public class ApiService<T>:IApiService<T>
+    public class ApiService:IApiService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private string _resourcePath;
 
         public ApiService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
-            _resourcePath = $"api/{typeof(T).Name.ToLower()}";
         }
 
-        public async Task<List<T>> Get(string organizationId=null)
+        public async Task<List<T>> Get<T>(string organizationId=null)
         {
             var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
-            var data = await client.GetFromJsonAsync<List<T>>($"{GetBasePath(organizationId)}");
+            var data = await client.GetFromJsonAsync<List<T>>($"{GetBasePath<T>(organizationId)}");
 
             return data;
         }
 
-        public async Task Save(T toSave, string organizationId = null)
+        public async Task Save<T>(T toSave, string organizationId = null)
         {
             var client = _httpClientFactory.CreateClient("ApiAuthenticated");
             var objectWithIdentity = toSave as IIdentifiable;
 
             if (string.IsNullOrWhiteSpace(objectWithIdentity.Id))
             {
-                var result = await client.PostAsJsonAsync($"{GetBasePath(organizationId)}", toSave);
+                var result = await client.PostAsJsonAsync($"{GetBasePath<T>(organizationId)}", toSave);
                 result.EnsureSuccessStatusCode();
             }
             else
             {
-                var result = await client.PutAsJsonAsync($"{GetBasePath(organizationId)}/{objectWithIdentity.Id}", toSave);
+                var result = await client.PutAsJsonAsync($"{GetBasePath<T>(organizationId)}/{objectWithIdentity.Id}", toSave);
                 result.EnsureSuccessStatusCode();
             }
         }
 
-        public async Task Delete(string id, string organizationId = null)
+        public async Task Delete<T>(string id, string organizationId = null)
         {
             var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
-            var result = await client.DeleteAsync($"{GetBasePath(organizationId)}/{id}");
+            var result = await client.DeleteAsync($"{GetBasePath<T>(organizationId)}/{id}");
             result.EnsureSuccessStatusCode();
         }
 
-        private string GetBasePath(string organizationId)
+        private string GetBasePath<T>(string organizationId)
         {
-            if (string.IsNullOrWhiteSpace(organizationId)) return _resourcePath;
+            var resourcePath = $"api/{typeof(T).Name.ToLower()}";
+            if (string.IsNullOrWhiteSpace(organizationId)) return resourcePath;
 
-            return $"{_resourcePath}/{organizationId}";
+            return $"{resourcePath}/{organizationId}";
         }
 
         
