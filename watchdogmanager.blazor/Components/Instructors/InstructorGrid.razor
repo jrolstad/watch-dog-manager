@@ -1,0 +1,28 @@
+﻿@if (Data == null)
+{
+    <MatProgressCircle Indeterminate="true" FourColored="true" />
+}
+else
+{
+    <MatTable Items="@Data" class="mat-elevation-z5" ShowPaging="false" UseSortHeaderRow="true">
+        <MatTableHeader>
+            <MatSortHeaderRow SortChanged="@SortData">
+                <MatSortHeader></MatSortHeader>
+                <MatSortHeader SortId="firstname">First Name</MatSortHeader>
+                <MatSortHeader SortId="lastname">Last Name</MatSortHeader>
+                <MatSortHeader SortId="grade">Grade</MatSortHeader>
+                <MatSortHeader SortId="room">Room</MatSortHeader>
+            </MatSortHeaderRow>
+        </MatTableHeader>
+        <MatTableRow>
+            <td>
+                <MatButton Command="EditCommand" CommandParameter="@context.Id">Edit</MatButton>&nbsp;
+                <MatButton Command="DeleteCommand" CommandParameter="@context.Id">Delete</MatButton>
+            </td>
+            <td>@context.FirstName</td>
+            <td>@context.LastName</td>
+            <td>@context.Grade</td>
+            <td>@context.Room</td>
+        </MatTableRow>
+    </MatTable>
+}

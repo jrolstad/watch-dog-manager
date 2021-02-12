@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace watchdogmanager.blazor.Models
 {
-    public class Instructor
+    public class Instructor: IIdentifiable
     {
         public string Id { get; set; }
         public string FirstName { get; set; }
