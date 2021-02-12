@@ -36,8 +36,8 @@ namespace watchdogmanager.blazor.Configuration
 
         private static void RegisterApiHttpClient(IServiceCollection services, IConfiguration configuration)
         {
-            var baseAddress = configuration["ApiBaseUri"];
-            var permission = configuration["ApiPermission"];
+            var baseAddress = configuration["Api:Url"];
+            var permission = configuration["Api:Scope"];
 
 
             services.AddHttpClient("ApiAuthenticated", client =>

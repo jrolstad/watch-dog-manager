@@ -15,7 +15,7 @@ namespace watchdogmanager.blazor.Configuration
 
             services.AddMsalAuthentication(options =>
             {
-                var apiScope = configuration["ApiPermission"];
+                var apiScope = configuration["Api:Scope"];
 
                 configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
                 options.ProviderOptions.DefaultAccessTokenScopes.Add(apiScope);

@@ -21,7 +21,7 @@ namespace watchdogmanager.blazor.Services
         public ApiService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
-            _resourcePath = typeof(T).Name.ToLower();
+            _resourcePath = $"api/{typeof(T).Name.ToLower()}";
         }
 
         public async Task<List<T>> Get(string organizationId=null)
