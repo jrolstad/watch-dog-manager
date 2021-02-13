@@ -1,8 +1,6 @@
 ﻿@page "/organizations"
-<EntityTypeHeader Type="Organizations" />
+<EntityTypeHeader Type="Organizations" OnAdd="OpenNewDialog" AddCommandText="Add Organization"/>
 
-<MatButton Raised="true" OnClick="OpenNewDialog">New Organization</MatButton>
-<br />
 <watchdogmanager.blazor.Components.Organizations.OrganizationGrid Data="Data" OnEdit="OnEdit" OnDelete="OnDelete" />
 
 <MatDialog @bind-IsOpen="@DialogIsOpen">

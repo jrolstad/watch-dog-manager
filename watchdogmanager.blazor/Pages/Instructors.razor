@@ -1,8 +1,6 @@
 ﻿@page "/instructors"
-<EntityTypeHeader Type="Instructors"/>
+<EntityTypeHeader Type="Instructors" OnAdd="OpenNewDialog" AddCommandText="Add Instructor"/>
 
-<MatButton Raised="true" OnClick="OpenNewDialog">Add Instructor</MatButton>
-<br />
 <watchdogmanager.blazor.Components.Instructors.InstructorGrid Data="Data" OnEdit="OnEdit" OnDelete="OnDelete" />
 
 <MatDialog @bind-IsOpen="@DialogIsOpen">

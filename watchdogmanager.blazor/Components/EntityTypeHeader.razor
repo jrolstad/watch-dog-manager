@@ -1,1 +1,10 @@
 ﻿<MatHeadline2>@Type</MatHeadline2>
+
+@if (OnAdd != null)
+{
+    <MatButton Raised="true" OnClick="OnAdd" Icon="add">@AddCommandText</MatButton>
+}
+
+<br />
+<br />
+<MatDivider />

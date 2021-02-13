@@ -1,8 +1,5 @@
 ﻿@page "/scheduletemplates"
-<EntityTypeHeader Type="Schedule Templates" />
-
-<MatButton Raised="true" OnClick="AddNew">New Schedule Template</MatButton>
-<br />
+<EntityTypeHeader Type="Schedule Templates" OnAdd="AddNew" AddCommandText="New Schedule Template"/>
 
 <watchdogmanager.blazor.Components.ScheduleTemplates.ScheduleTemplateGrid Data="Data" OnEdit="OnEdit" OnDelete="OnDelete" />
 
