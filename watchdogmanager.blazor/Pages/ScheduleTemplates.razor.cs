@@ -10,19 +10,16 @@ namespace watchdogmanager.blazor.Pages
 {
     public partial class ScheduleTemplates
     {
-
-
         [Inject]
         public IApiService ApiService { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         [Inject]
         public AppState AppState { get; set; }
 
         public List<ScheduleTemplate> Data { get; set; }
-
-        public ScheduleTemplate SelectedItem { get; set; }
-
-        private bool DialogIsOpen = false;
 
         protected override async Task OnInitializedAsync()
         {
@@ -30,50 +27,31 @@ namespace watchdogmanager.blazor.Pages
             await RefreshData();
         }
 
-        void OpenNewDialog()
-        {
-            SelectedItem = new ScheduleTemplate();
-            ShowSelectedItem();
-        }
-
-        async Task SaveClick()
-        {
-            DialogIsOpen = false;
-
-            ResetData();
-            await ApiService.Save(SelectedItem, AppState.CurrentOrganization.Id);
-            await RefreshData();
-        }
-        async Task CancelClick()
-        {
-            DialogIsOpen = false;
-        }
-
-
         async Task OnEdit(string id)
         {
-            SelectedItem = Data.FirstOrDefault(o => o.Id == id);
-            ShowSelectedItem();
+            var item = Data.FirstOrDefault(o => o.Id == id);
+            ShowDetail(item);
         }
 
         async Task OnDelete(string id)
         {
-            SelectedItem = Data.FirstOrDefault(o => o.Id == id);
-            if (SelectedItem != null)
+            var item = Data.FirstOrDefault(o => o.Id == id);
+            if (item != null)
             {
                 ResetData();
-                await ApiService.Delete<ScheduleTemplate>(SelectedItem.Id, AppState.CurrentOrganization.Id);
+                await ApiService.Delete<ScheduleTemplate>(item.Id, AppState.CurrentOrganization.Id);
                 await RefreshData();
             }
         }
 
-        void ShowSelectedItem()
+        void AddNew()
         {
-            if (SelectedItem != null)
-            {
-                DialogIsOpen = true;
-                StateHasChanged();
-            }
+            NavigationManager.NavigateTo($"/scheduletemplates/{AppState.CurrentOrganization.Id}");
+
+        }
+        void ShowDetail(ScheduleTemplate item)
+        {
+            NavigationManager.NavigateTo($"/scheduletemplates/{AppState.CurrentOrganization.Id}/{item?.Id}");
         }
 
         async Task RefreshData()

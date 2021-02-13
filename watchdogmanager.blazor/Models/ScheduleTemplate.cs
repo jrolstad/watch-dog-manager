@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace watchdogmanager.blazor.Models
 {
@@ -17,5 +18,17 @@ namespace watchdogmanager.blazor.Models
         public bool IsInstructorLed { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+
+        public string StartValue
+        {
+            get { return Start.ToString("HH:mm:ss"); }
+            set { Start = DateTime.ParseExact(value, "HH:mm:ss", CultureInfo.InvariantCulture); }
+        }
+
+        public string EndValue
+        {
+            get { return End.ToString("HH:mm:ss"); }
+            set { End = DateTime.ParseExact(value, "HH:mm:ss", CultureInfo.InvariantCulture); }
+        }
     }
 }

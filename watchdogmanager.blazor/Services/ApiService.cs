@@ -9,6 +9,7 @@ namespace watchdogmanager.blazor.Services
     public interface IApiService
     {
         Task<List<T>> Get<T>(string organizationId=null);
+        Task<T> Get<T>(string organizationId, string id);
         Task Save<T>(T toSave, string organizationId = null);
         Task Delete<T>(string id, string organizationId = null);
     }
@@ -27,6 +28,15 @@ namespace watchdogmanager.blazor.Services
             var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
             var data = await client.GetFromJsonAsync<List<T>>($"{GetBasePath<T>(organizationId)}");
+
+            return data;
+        }
+
+        public async Task<T> Get<T>(string organizationId, string id)
+        {
+            var client = _httpClientFactory.CreateClient("ApiAuthenticated");
+
+            var data = await client.GetFromJsonAsync<T>($"{GetBasePath<T>(organizationId)}/{id}");
 
             return data;
         }
