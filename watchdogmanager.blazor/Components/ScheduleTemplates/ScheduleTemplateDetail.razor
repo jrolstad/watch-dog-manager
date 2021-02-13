@@ -1,0 +1,10 @@
+﻿@if (Data == null)
+{
+    <MatProgressCircle Indeterminate="true" FourColored="true" />
+}
+else
+{
+    <p>
+        <MatTextField @bind-Value="@Data.Name" Label="Name" FullWidth="true"></MatTextField>
+    </p>
+}
