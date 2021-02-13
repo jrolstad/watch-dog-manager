@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using watchdogmanager.blazor.Mappers;
 using watchdogmanager.blazor.Models;
 using watchdogmanager.blazor.Services;
 
@@ -25,6 +26,9 @@ namespace watchdogmanager.blazor.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
+        [Inject]
+        public InstructorAvailabilityMapper Mapper { get; set; }
+
         Instructor Data { get; set; }
 
         public List<InstructorAvailability> Availability { get; set; }
@@ -37,62 +41,30 @@ namespace watchdogmanager.blazor.Pages
             if (string.IsNullOrWhiteSpace(Id))
             {
                 Data = new Instructor();
-                Availability = GetAvailability(new List<InstructorAvailability>(),scheduleTemplates);
+                Availability = Mapper.Map(Id, new List<InstructorAvailability>(),scheduleTemplates);
             }
             else
             {
                 Data = await ApiService.GetItem<Instructor>(OrganizationId, Id);
                 var existingData = await ApiService.GetCollection<InstructorAvailability>(OrganizationId, Id);
-                Availability = GetAvailability(existingData, scheduleTemplates);
+                Availability = Mapper.Map(Id, existingData, scheduleTemplates);
             }
            
         }
 
         async Task Save()
         {
-            await ApiService.Save(Data, AppState.CurrentOrganization.Id);
+            var saveInstructorTask = ApiService.Save(Data, AppState.CurrentOrganization.Id);
+            var saveAvailabilityTasks = Availability.Select(a => ApiService.Save(a, AppState.CurrentOrganization.Id)).ToList();
+
+            await Task.WhenAll(saveInstructorTask);
+            await Task.WhenAll(saveAvailabilityTasks);
+
             NavigationManager.NavigateTo("/instructors");
         }
         async Task Cancel()
         {
             NavigationManager.NavigateTo("/instructors");
-        }
-
-        List<InstructorAvailability> GetAvailability(List<InstructorAvailability> existing, List<ScheduleTemplate> scheduleTemplates)
-        {
-            var result = new List<InstructorAvailability>(existing);
-
-            foreach(var item in scheduleTemplates)
-            {
-                if(!result.Any(t=>t.ScheduleTemplateId == item.Id))
-                {
-                    result.Add(new InstructorAvailability
-                    {
-                        InstructorId = this.Id,
-                        ScheduleTemplateId = item.Id,
-                        Name = item.Name,
-                        Availability = new List<InstructorSessionAvailability>()
-                    });
-                }
-
-                var matchingTemplate = result.First(t => t.ScheduleTemplateId == item.Id);
-                
-                foreach(var session in item.Sessions.Where(s=>s.IsInstructorLed))
-                {
-                    if(!matchingTemplate.Availability.Any(t=>t.ScheduleTemplateSessionId == session.Id))
-                    {
-                        matchingTemplate.Availability.Add(new InstructorSessionAvailability 
-                        { 
-                            ScheduleTemplateSessionId = session.Id,
-                            Start = session.Start,
-                            IsAvailable = false,
-                            DayOfWeek = ""
-                        });
-                    }
-                }
-            }
-
-            return result;
         }
     }
 }

@@ -21,7 +21,6 @@ namespace watchdogmanager.blazor.Models
     {
         public string ScheduleTemplateSessionId { get; set; }
         public DateTime Start { get; set; }
-        public string DayOfWeek { get; set; }
-        public bool IsAvailable { get; set; }
+        public Dictionary<string, bool> IsAvailable { get; set; }
     }
 }

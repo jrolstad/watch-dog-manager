@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using watchdogmanager.blazor.Mappers;
 using watchdogmanager.blazor.Models;
 using watchdogmanager.blazor.Services;
 namespace watchdogmanager.blazor.Configuration
@@ -23,6 +24,7 @@ namespace watchdogmanager.blazor.Configuration
             RegisterApiHttpClient(services, configuration);
 
             services.AddTransient<IApiService, ApiService>();
+            services.AddTransient<InstructorAvailabilityMapper>();
 
             services.AddSingleton<AppState>();
         }

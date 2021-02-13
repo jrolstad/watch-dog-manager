@@ -15,22 +15,19 @@ namespace watchdogmanager.blazor.Components.Instructors
 
         public InstructorAvailability SelectedItem { get; set; }
 
-        List<DayOfWeek> DaysOfTheWeek { get; set; }
-
-        protected override void OnInitialized()
-        {
-            DaysOfTheWeek = new List<DayOfWeek> 
-            { 
-                DayOfWeek.Monday,
-                DayOfWeek.Tuesday,
-                DayOfWeek.Wednesday,
-                DayOfWeek.Thursday,
-                DayOfWeek.Friday,
-            };
-        }
         protected override async Task OnParametersSetAsync()
         {
             SelectedItem = Availability?.FirstOrDefault();
+        }
+
+        List<string> GetDaysOfTheWeek(InstructorAvailability item)
+        {
+            if (item?.Availability == null) return new List<string>();
+
+            return item.Availability
+                .SelectMany(a => a.IsAvailable.Keys)
+                .Distinct()
+                .ToList();
         }
 
     }

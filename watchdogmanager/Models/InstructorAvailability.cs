@@ -20,7 +20,6 @@ namespace watchdogmanager.Models
     public class InstructorSessionAvailability
     {
         public string ScheduleTemplateSessionId { get; set; }
-        public string DayOfWeek { get; set; }
-        public bool IsAvailable { get; set; }
+        public Dictionary<string,bool> IsAvailable { get; set; }
     }
 }

@@ -12,7 +12,7 @@
 <MatTable Items="@SelectedItem?.Availability" class="mat-elevation-z5" ShowPaging="false" PageSize="10000">
     <MatTableHeader>
         <th style="width:300px">Session</th>
-        @foreach(var day in DaysOfTheWeek)
+        @foreach(var day in GetDaysOfTheWeek(SelectedItem))
         {
             <th>@day</th>
         }
@@ -21,9 +21,9 @@
         <td>
             @context.Start.ToString("h:mm tt")
         </td>
-        @foreach (var day in DaysOfTheWeek)
+        @foreach (var day in GetDaysOfTheWeek(SelectedItem))
         {
-            <td><MatCheckbox Value="false"/></td>
+            <td><MatCheckbox @bind-Value="@context.IsAvailable[day]" /></td>
         }
     </MatTableRow>
 </MatTable>
