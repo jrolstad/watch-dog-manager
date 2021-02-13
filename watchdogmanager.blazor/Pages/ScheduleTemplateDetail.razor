@@ -1,7 +1,6 @@
 ﻿@page "/scheduletemplates/{OrganizationId}/{ScheduleTemplateId}"
 
-<MatBlazor.MatHeadline2>@Data?.Name</MatBlazor.MatHeadline2>
-<MatSubtitle1>Schedule Template</MatSubtitle1>
+<EntityHeader Type="Schedule Template" Name="@Data?.Name"/>
 
 <watchdogmanager.blazor.Components.ScheduleTemplates.ScheduleTemplateDetail Data="Data" />
 
