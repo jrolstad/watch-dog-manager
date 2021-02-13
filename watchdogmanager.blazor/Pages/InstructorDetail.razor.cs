@@ -8,7 +8,7 @@ using watchdogmanager.blazor.Services;
 
 namespace watchdogmanager.blazor.Pages
 {
-    public partial class ScheduleTemplateDetail
+    public partial class InstructorDetail
     {
         [Parameter]
         public string OrganizationId { get; set; }
@@ -25,17 +25,17 @@ namespace watchdogmanager.blazor.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        ScheduleTemplate Data { get; set; }
+        Instructor Data { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
             if (string.IsNullOrWhiteSpace(Id))
             {
-                Data = new ScheduleTemplate { Name = "New Schedule",Sessions = new List<ScheduleTemplateSession>() };
+                Data = new Instructor();
             }
             else
             {
-                Data = await ApiService.Get<ScheduleTemplate>(OrganizationId, Id);
+                Data = await ApiService.Get<Instructor>(OrganizationId, Id);
 
             }
         }
@@ -43,11 +43,11 @@ namespace watchdogmanager.blazor.Pages
         async Task Save()
         {
             await ApiService.Save(Data, AppState.CurrentOrganization.Id);
-            NavigationManager.NavigateTo("/scheduletemplates");
+            NavigationManager.NavigateTo("/instructors");
         }
         async Task Cancel()
         {
-            NavigationManager.NavigateTo("/scheduletemplates");
+            NavigationManager.NavigateTo("/instructors");
         }
     }
 }

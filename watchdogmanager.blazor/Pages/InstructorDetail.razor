@@ -1,0 +1,10 @@
+﻿@page "/instructors/{OrganizationId}/{Id}"
+
+<EntityHeader Type="Instructor" Name="@($"{Data?.FirstName} {Data?.LastName}".Trim())" />
+
+<watchdogmanager.blazor.Components.Instructors.InstructorDetail Data="Data" />
+
+<MatDivider />
+<br />
+<br />
+<EntityEditCommandBar OnSave="Save" OnCancel="Cancel" />

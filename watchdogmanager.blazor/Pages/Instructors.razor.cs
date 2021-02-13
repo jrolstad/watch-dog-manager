@@ -17,11 +17,10 @@ namespace watchdogmanager.blazor.Pages
         [Inject]
         public AppState AppState { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         public List<Instructor> Data { get; set; }
-
-        public Instructor SelectedItem { get; set; }
-
-        private bool DialogIsOpen = false;
 
         protected override async Task OnInitializedAsync()
         {
@@ -29,49 +28,34 @@ namespace watchdogmanager.blazor.Pages
             await RefreshData();
         }
 
-        void OpenNewDialog()
-        {
-            SelectedItem = new Instructor();
-            ShowSelectedItem();
-        }
-
-        async Task SaveClick()
-        {
-            DialogIsOpen = false;
-
-            ResetData();
-            await ApiService.Save(SelectedItem, AppState.CurrentOrganization.Id);
-            await RefreshData();
-        }
-        async Task CancelClick()
-        {
-            DialogIsOpen = false;
-        }
-
-
         async Task OnEdit(string id)
         {
-            SelectedItem = Data.FirstOrDefault(o => o.Id == id);
-            ShowSelectedItem();
+            var item = Data.FirstOrDefault(o => o.Id == id);
+            ShowSelectedItem(item);
         }
 
         async Task OnDelete(string id)
         {
-            SelectedItem = Data.FirstOrDefault(o => o.Id == id);
-            if (SelectedItem != null)
+            var item = Data.FirstOrDefault(o => o.Id == id);
+            if (item != null)
             {
                 ResetData();
-                await ApiService.Delete<Instructor>(SelectedItem.Id, AppState.CurrentOrganization.Id);
+                await ApiService.Delete<Instructor>(item.Id, AppState.CurrentOrganization.Id);
                 await RefreshData();
             }
         }
 
-        void ShowSelectedItem()
+        void AddNew()
         {
-            if (SelectedItem != null)
+            NavigationManager.NavigateTo($"/instructors/{AppState.CurrentOrganization.Id}");
+
+        }
+
+        void ShowSelectedItem(Instructor item)
+        {
+            if (item != null)
             {
-                DialogIsOpen = true;
-                StateHasChanged();
+                NavigationManager.NavigateTo($"/instructors/{AppState.CurrentOrganization.Id}/{item?.Id}");
             }
         }
 
