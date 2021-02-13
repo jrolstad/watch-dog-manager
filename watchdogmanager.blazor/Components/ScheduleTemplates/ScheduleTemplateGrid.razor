@@ -13,8 +13,7 @@ else
         </MatTableHeader>
         <MatTableRow>
             <td>
-                <MatButton Command="EditCommand" CommandParameter="@context.Id">Edit</MatButton>&nbsp;
-                <MatButton Command="DeleteCommand" CommandParameter="@context.Id">Delete</MatButton>
+                <EntityActionCommandBar EditCommand="EditCommand" DeleteCommand="DeleteCommand" Id="@context.Id" />
             </td>
             <td>@context.Name</td>
         </MatTableRow>
