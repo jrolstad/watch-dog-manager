@@ -14,10 +14,5 @@ namespace watchdogmanager.blazor.Components.Instructors
 
         [Parameter]
         public List<InstructorAvailability> Availability { get; set; }
-
-        [Parameter]
-        public List<ScheduleTemplate> ScheduleTemplates { get; set; }
-
-        public ScheduleTemplate SelectedTemplate { get; set; }
     }
 }

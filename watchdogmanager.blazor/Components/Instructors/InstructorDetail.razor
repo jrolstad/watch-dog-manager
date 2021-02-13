@@ -7,7 +7,10 @@ else
     <p>
         <MatTextField @bind-Value="@Data.FirstName" Label="First Name" FullWidth="true"></MatTextField>
         <MatTextField @bind-Value="@Data.LastName" Label="Last Name" FullWidth="true"></MatTextField>
-        <MatTextField @bind-Value="@Data.Grade" Label="Grade" ></MatTextField>
+        <MatTextField @bind-Value="@Data.Grade" Label="Grade"></MatTextField>
         <MatTextField @bind-Value="@Data.Room" Label="Room"></MatTextField>
     </p>
+
+    <InstructorAvailabilityDetail  Availability="Availability"/>
+
 }

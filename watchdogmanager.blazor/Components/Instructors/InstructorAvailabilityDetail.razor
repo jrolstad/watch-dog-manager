@@ -1,0 +1,29 @@
+﻿
+<MatHeadline4>Availability</MatHeadline4>
+<MatDivider />
+<br />
+
+<MatSelectItem @bind-Value="@SelectedItem" Items="@Availability">
+    <ItemTemplate>
+        @context?.Name
+    </ItemTemplate>
+</MatSelectItem>
+
+<MatTable Items="@SelectedItem?.Availability" class="mat-elevation-z5" ShowPaging="false" PageSize="10000">
+    <MatTableHeader>
+        <th style="width:300px">Session</th>
+        @foreach(var day in DaysOfTheWeek)
+        {
+            <th>@day</th>
+        }
+    </MatTableHeader>
+    <MatTableRow>
+        <td>
+            @context.Start.ToString("h:mm tt")
+        </td>
+        @foreach (var day in DaysOfTheWeek)
+        {
+            <td><MatCheckbox Value="false"/></td>
+        }
+    </MatTableRow>
+</MatTable>

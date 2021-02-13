@@ -11,6 +11,7 @@ namespace watchdogmanager.blazor.Models
 
         public string InstructorId { get; set; }
         public string ScheduleTemplateId { get; set; }
+        public string Name { get; set; }
 
         public string Notes { get; set; }
         public List<InstructorSessionAvailability> Availability { get; set; }
@@ -19,6 +20,7 @@ namespace watchdogmanager.blazor.Models
     public class InstructorSessionAvailability
     {
         public string ScheduleTemplateSessionId { get; set; }
+        public DateTime Start { get; set; }
         public string DayOfWeek { get; set; }
         public bool IsAvailable { get; set; }
     }
