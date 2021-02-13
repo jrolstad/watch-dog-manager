@@ -11,8 +11,7 @@
         <watchdogmanager.blazor.Components.Organizations.OrganizationDetail Data="SelectedItem" />
     </MatDialogContent>
     <MatDialogActions>
-        <MatButton OnClick="CancelClick">Cancel</MatButton>
-        <MatButton OnClick="SaveClick">Save</MatButton>
+        <EntityEditCommandBar OnSave="SaveClick" OnCancel="CancelClick" />
     </MatDialogActions>
 </MatDialog>
 
