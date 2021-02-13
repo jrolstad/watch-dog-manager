@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using watchdogmanager.blazor.Models;
 
 namespace watchdogmanager.blazor.Mappers
@@ -43,32 +42,59 @@ namespace watchdogmanager.blazor.Mappers
         {
             var availableSessionsById = availability.Availability.ToDictionary(a => a.ScheduleTemplateSessionId);
 
-            foreach (var session in template.Sessions.Where(s=>s.IsInstructorLed))
-            {
-                if (!availableSessionsById.ContainsKey(session.Id))
-                {
-                    availableSessionsById.Add(session.Id, new InstructorSessionAvailability 
-                    { 
-                        ScheduleTemplateSessionId = session.Id,
-                        IsAvailable = new Dictionary<string, bool>(),
-                       
-                    });
-                }
+            var instructorLedSessions = template.Sessions
+                .Where(s => s.IsInstructorLed)
+                .ToList();
 
-                var item = availableSessionsById[session.Id];
-                item.Start = session.Start;
-                
-                foreach(var day in GetDaysOfTheWeek())
-                {
-                    var dayName = day.ToString();
-                    if(!item.IsAvailable.ContainsKey(dayName))
-                    {
-                        item.IsAvailable.Add(dayName, false);
-                    }
-                }
+            foreach (var session in instructorLedSessions)
+            {
+                var item = MapSession(availableSessionsById, session);
+                MapDaysOfTheWeek(item);
             }
 
-            availability.Availability = availableSessionsById.Values.ToList();
+            RemoveOrphanedSessions(availableSessionsById, instructorLedSessions);
+
+            availability.Availability = availableSessionsById.Values
+                .OrderBy(a => a.Start)
+                .ToList();
+        }
+
+        private static InstructorSessionAvailability MapSession(Dictionary<string, InstructorSessionAvailability> availableSessionsById, ScheduleTemplateSession session)
+        {
+            if (!availableSessionsById.ContainsKey(session.Id))
+            {
+                availableSessionsById.Add(session.Id, new InstructorSessionAvailability
+                {
+                    ScheduleTemplateSessionId = session.Id,
+                    IsAvailable = new Dictionary<string, bool>(),
+
+                });
+            }
+
+            var item = availableSessionsById[session.Id];
+            item.Start = session.Start;
+            return item;
+        }
+
+        private static void RemoveOrphanedSessions(Dictionary<string, InstructorSessionAvailability> availableSessionsById, List<ScheduleTemplateSession> instructorLedSessions)
+        {
+            var orphanedAvailability = availableSessionsById.Values
+                .Where(a => !instructorLedSessions.Any(s => s.Id == a.ScheduleTemplateSessionId))
+                .ToList(); ;
+
+            orphanedAvailability.ForEach(a => availableSessionsById.Remove(a.ScheduleTemplateSessionId));
+        }
+
+        private static void MapDaysOfTheWeek(InstructorSessionAvailability item)
+        {
+            foreach (var day in GetDaysOfTheWeek())
+            {
+                var dayName = day.ToString();
+                if (!item.IsAvailable.ContainsKey(dayName))
+                {
+                    item.IsAvailable.Add(dayName, false);
+                }
+            }
         }
 
         private static IEnumerable<DayOfWeek> GetDaysOfTheWeek()
