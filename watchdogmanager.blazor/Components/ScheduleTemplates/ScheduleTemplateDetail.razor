@@ -8,33 +8,32 @@ else
         <MatTextField @bind-Value="@Data.Name" Label="Name" FullWidth="true"></MatTextField>
     </p>
 
-    @foreach (var item in Data.Sessions)
-    {
-        <div class="mat-layout-grid">
-            <div class="mat-layout-grid-inner">
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-6">
-                    <MatTextField @bind-Value="@item.Description" Label="Description" FullWidth="true"></MatTextField>
-                </div>
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                    <MatCheckbox @bind-Value="@item.IsInstructorLed" Label="Instructor Led"></MatCheckbox>
-                </div>
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-2">
+    <MatTable Items="@Data.Sessions" class="mat-elevation-z5" ShowPaging="false" PageSize="1000">
+        <MatTableHeader>
+            <th style="width:75%">Description</th>
+            <th>Instructor Led</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th></th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td>
+                <MatTextField @bind-Value="@context.Description" FullWidth="true" TextArea="true"/>
+            </td>
+            <td>
+                <MatCheckbox @bind-Value="@context.IsInstructorLed"/>
+            </td>
+            <td>
+                <MatTextField @bind-Value="@context.StartValue" Type="time"/>
+            </td>
+            <td>
+                <MatTextField @bind-Value="@context.EndValue" Type="time" />
+            </td>
+            <td>
+                <MatButton Icon="delete" Command="DeleteSessionCommand" CommandParameter="@context"></MatButton>
+            </td>
+        </MatTableRow>
+    </MatTable>
 
-                </div>
-
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-5">
-                    <MatTextField @bind-Value="@item.StartValue" Type="time" Label="Start"></MatTextField>
-                </div>
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-5">
-                    <MatTextField @bind-Value="@item.EndValue" Type="time" Label="End"></MatTextField>
-                </div>
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-2">
-                    <MatButton Icon="delete" Command="DeleteSessionCommand" CommandParameter="@item"></MatButton>
-                </div>
-            </div>
-        </div>
-        <MatDivider></MatDivider>
-    }
-    <br />
-    <MatButton Raised="true" OnClick="AddSession">Add Session</MatButton>
+    <MatButton OnClick="AddSession">Add Session</MatButton>
 }

@@ -24,9 +24,16 @@ namespace watchdogmanager.blazor.Components.ScheduleTemplates
         {
             if (Data != null)
             {
-                Data.Sessions = Data.Sessions ?? new List<ScheduleTemplateSession>();
-            }
+                if(Data.Sessions == null)
+                {
+                    Data.Sessions = new List<ScheduleTemplateSession>();
+                }
 
+                Data.Sessions = Data.Sessions
+                    .OrderBy(s => s.Start)
+                    .ToList();
+            }
+            
         }
 
         private void AddSession()
