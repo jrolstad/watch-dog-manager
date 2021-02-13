@@ -212,3 +212,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/watchdogmanager.functions/Properties/PublishProfiles/watchdogmanager-api-2 - Zip Deploy.pubxml
+/watchdogmanager.functions/Properties/ServiceDependencies/watchdogmanager-api-2 - Zip Deploy/profile.arm.json

@@ -8,8 +8,8 @@ namespace watchdogmanager.blazor.Services
 {
     public interface IApiService
     {
-        Task<List<T>> Get<T>(string organizationId=null);
-        Task<T> Get<T>(string organizationId, string id);
+        Task<List<T>> GetCollection<T>(string organizationId=null,string id=null);
+        Task<T> GetItem<T>(string organizationId, string id);
         Task Save<T>(T toSave, string organizationId = null);
         Task Delete<T>(string id, string organizationId = null);
     }
@@ -23,20 +23,20 @@ namespace watchdogmanager.blazor.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<List<T>> Get<T>(string organizationId=null)
+        public async Task<List<T>> GetCollection<T>(string organizationId=null, string id=null)
         {
             var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
-            var data = await client.GetFromJsonAsync<List<T>>($"{GetBasePath<T>(organizationId)}");
+            var data = await client.GetFromJsonAsync<List<T>>($"{GetBasePath<T>(organizationId,id)}");
 
             return data;
         }
 
-        public async Task<T> Get<T>(string organizationId, string id)
+        public async Task<T> GetItem<T>(string organizationId, string id)
         {
             var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
-            var data = await client.GetFromJsonAsync<T>($"{GetBasePath<T>(organizationId)}/{id}");
+            var data = await client.GetFromJsonAsync<T>($"{GetBasePath<T>(organizationId,id)}");
 
             return data;
         }
@@ -53,7 +53,7 @@ namespace watchdogmanager.blazor.Services
             }
             else
             {
-                var result = await client.PutAsJsonAsync($"{GetBasePath<T>(organizationId)}/{objectWithIdentity.Id}", toSave);
+                var result = await client.PutAsJsonAsync($"{GetBasePath<T>(organizationId, objectWithIdentity.Id)}", toSave);
                 result.EnsureSuccessStatusCode();
             }
         }
@@ -62,16 +62,17 @@ namespace watchdogmanager.blazor.Services
         {
             var client = _httpClientFactory.CreateClient("ApiAuthenticated");
 
-            var result = await client.DeleteAsync($"{GetBasePath<T>(organizationId)}/{id}");
+            var result = await client.DeleteAsync($"{GetBasePath<T>(organizationId,id)}");
             result.EnsureSuccessStatusCode();
         }
 
-        private string GetBasePath<T>(string organizationId)
+        private string GetBasePath<T>(string organizationId, string id=null)
         {
             var resourcePath = $"api/{typeof(T).Name.ToLower()}";
             if (string.IsNullOrWhiteSpace(organizationId)) return resourcePath;
+            if (string.IsNullOrWhiteSpace(id)) return $"{resourcePath}/{organizationId}";
 
-            return $"{resourcePath}/{organizationId}";
+            return $"{resourcePath}/{organizationId}/{id}";
         }
 
         

@@ -2,7 +2,11 @@
 
 <EntityHeader Type="Instructor" Name="@($"{Data?.FirstName} {Data?.LastName}".Trim())" />
 
-<watchdogmanager.blazor.Components.Instructors.InstructorDetail Data="Data" />
+<watchdogmanager.blazor.Components.Instructors.InstructorDetail 
+            Data="Data" 
+            ScheduleTemplates="ScheduleTemplates"
+            Availability="Availability"
+/>
 
 <MatDivider />
 <br />

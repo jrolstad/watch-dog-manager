@@ -27,7 +27,7 @@ namespace watchdogmanager.functions.Functions
         [FunctionName("instructoravailability-list")]
         [ProducesResponseType(typeof(IEnumerable<InstructorAvailability>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> List(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "instructor/availability/{organizationId}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "instructoravailability/{organizationId}")] HttpRequest req,
             string organizationId,
             ILogger log)
         {
@@ -41,14 +41,14 @@ namespace watchdogmanager.functions.Functions
         [FunctionName("instructoravailability-get")]
         [ProducesResponseType(typeof(InstructorAvailability), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "instructor/availability/{organizationId}/{id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "instructoravailability/{organizationId}/{id}")] HttpRequest req,
             ILogger log,
             string organizationId,
             string id)
         {
             if (!_authorizationManager.CanManageInstructors(req.HttpContext.User, organizationId)) return new UnauthorizedResult();
 
-            var result = await _manager.GetById(organizationId, id);
+            var result = _manager.GetByInstructor(organizationId, id);
 
             return new OkObjectResult(result);
         }
@@ -56,7 +56,7 @@ namespace watchdogmanager.functions.Functions
         [FunctionName("instructoravailability-post")]
         [ProducesResponseType(typeof(InstructorAvailability), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Post(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "instructor/availability/{organizationId}")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "instructoravailability/{organizationId}")]
             [RequestBodyType(typeof(InstructorAvailability),"Instructor")]HttpRequest req,
             string organizationId,
             ILogger log)
@@ -72,7 +72,7 @@ namespace watchdogmanager.functions.Functions
         [FunctionName("instructoravailability-put")]
         [ProducesResponseType(typeof(InstructorAvailability), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Put(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "instructor/availability/{organizationId}/{id}")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "instructoravailability/{organizationId}/{id}")]
             [RequestBodyType(typeof(InstructorAvailability),"Instructor")]HttpRequest req,
             ILogger log,
             string organizationId,
@@ -89,7 +89,7 @@ namespace watchdogmanager.functions.Functions
         [FunctionName("instructoravailability-delete")]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Delete(
-           [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "instructor/availability/{organizationId}/{id}")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "instructoravailability/{organizationId}/{id}")] HttpRequest req,
            ILogger log,
            string organizationId,
            string id)

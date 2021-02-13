@@ -26,7 +26,7 @@ namespace watchdogmanager.blazor.Models
         {
             if (CurrentOrganization==null)
             {
-                Organizations = await _apiService.Get<Organization>();
+                Organizations = await _apiService.GetCollection<Organization>();
                 CurrentOrganization = Organizations.First();
             }
             

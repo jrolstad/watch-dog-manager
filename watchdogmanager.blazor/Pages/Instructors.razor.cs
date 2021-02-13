@@ -61,7 +61,7 @@ namespace watchdogmanager.blazor.Pages
 
         async Task RefreshData()
         {
-            Data = await ApiService.Get<Instructor>(AppState.CurrentOrganization.Id);
+            Data = await ApiService.GetCollection<Instructor>(AppState.CurrentOrganization.Id);
             StateHasChanged();
         }
 

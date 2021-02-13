@@ -23,11 +23,12 @@ namespace watchdogmanager.Managers
                 .ToList();
         }
 
-        public Task<InstructorAvailability> GetById(string organizationId, string id)
+        public ICollection<InstructorAvailability> GetByInstructor(string organizationId, string instructorId)
         {
-            var item = _repository.Get(id);
-
-            return item;
+            return _repository.Get()
+               .Where(v => v.OrganizationId == organizationId)
+               .Where(v=>v.InstructorId == instructorId)
+               .ToList();
         }
 
         public Task<InstructorAvailability> Add(string organizationId, InstructorAvailability toAdd)

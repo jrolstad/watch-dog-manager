@@ -27,17 +27,23 @@ namespace watchdogmanager.blazor.Pages
 
         Instructor Data { get; set; }
 
+        public List<InstructorAvailability> Availability { get; set; }
+
+        public List<ScheduleTemplate> ScheduleTemplates { get; set; }
+
         protected override async Task OnParametersSetAsync()
         {
             if (string.IsNullOrWhiteSpace(Id))
             {
                 Data = new Instructor();
+                Availability = new List<InstructorAvailability>();
             }
             else
             {
-                Data = await ApiService.Get<Instructor>(OrganizationId, Id);
-
+                Data = await ApiService.GetItem<Instructor>(OrganizationId, Id);
+                Availability = await ApiService.GetCollection<InstructorAvailability>(OrganizationId, Id);
             }
+            ScheduleTemplates = await ApiService.GetCollection<ScheduleTemplate>(OrganizationId);
         }
 
         async Task Save()

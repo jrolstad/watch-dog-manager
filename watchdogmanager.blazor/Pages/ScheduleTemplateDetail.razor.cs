@@ -35,7 +35,7 @@ namespace watchdogmanager.blazor.Pages
             }
             else
             {
-                Data = await ApiService.Get<ScheduleTemplate>(OrganizationId, Id);
+                Data = await ApiService.GetItem<ScheduleTemplate>(OrganizationId, Id);
 
             }
         }
