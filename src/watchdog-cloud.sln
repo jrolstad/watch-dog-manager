@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogcloud.web", "watchdogcloud.web\watchdogcloud.web.csproj", "{B53220AC-F754-4916-8ABD-764F8E46FE30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B53220AC-F754-4916-8ABD-764F8E46FE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B53220AC-F754-4916-8ABD-764F8E46FE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B53220AC-F754-4916-8ABD-764F8E46FE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B53220AC-F754-4916-8ABD-764F8E46FE30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A10C61A8-8315-43DA-B39A-3D9A0A560AAC}
+	EndGlobalSection
+EndGlobal
