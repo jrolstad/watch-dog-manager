@@ -20,4 +20,8 @@
     <Folder Include="Properties\ServiceDependencies\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\watchdogcloud.core\watchdogcloud.core.csproj" />
+  </ItemGroup>
+
 </Project>
