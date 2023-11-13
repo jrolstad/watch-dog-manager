@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "watchdogcloud.web", "watchdogcloud.web\watchdogcloud.web.csproj", "{B53220AC-F754-4916-8ABD-764F8E46FE30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{A4402427-0B18-43F5-9D6B-3144B4DDF3E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B53220AC-F754-4916-8ABD-764F8E46FE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B53220AC-F754-4916-8ABD-764F8E46FE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B53220AC-F754-4916-8ABD-764F8E46FE30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4402427-0B18-43F5-9D6B-3144B4DDF3E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4402427-0B18-43F5-9D6B-3144B4DDF3E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4402427-0B18-43F5-9D6B-3144B4DDF3E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4402427-0B18-43F5-9D6B-3144B4DDF3E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
