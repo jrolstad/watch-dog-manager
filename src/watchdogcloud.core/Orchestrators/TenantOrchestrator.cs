@@ -1,26 +1,40 @@
 ﻿using watchdogcloud.core.Models;
+using watchdogcloud.core.Repositories;
 
 namespace watchdogcloud.core.Orchestrators
 {
     public class TenantOrchestrator
     {
-        public List<Tenant> Get() {  return new List<Tenant> { Get("id1")}; }
+        private readonly TenantRepository repository;
 
-        public Tenant Get(string id) { return new Tenant(id, "Number one", "one"); }
+        public TenantOrchestrator(TenantRepository repository)
+        {
+            this.repository = repository;
+        }
+
+        public List<Tenant> Get() 
+        {  
+            return repository.Get(); 
+        }
+
+        public Tenant Get(string id) 
+        { 
+            return repository.Get(id); 
+        }
 
         public Tenant Create(Tenant toCreate)
         {
-            return new Tenant(Guid.NewGuid().ToString(), toCreate.Name, toCreate.Code);
+            return repository.Create(toCreate);
         }
 
         public Tenant Update(Tenant toUpdate)
         {
-            return toUpdate;
+            return repository.Update(toUpdate);
         }
 
         public void Delete(string id)
         {
-
+            repository.Delete(id);
         }
     }
 }
