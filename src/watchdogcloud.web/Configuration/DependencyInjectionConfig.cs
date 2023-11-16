@@ -14,6 +14,8 @@ namespace watchdogcloud.web.Configuration
             services.AddTransient<TenantOrchestrator>();
             services.AddTransient<TenantRepository>();
             services.AddTransient<TenantMapper>();
+
+            services.AddTransient<UserOrchestrator>();
             
             ConfigureCosmosDb(services);
         }

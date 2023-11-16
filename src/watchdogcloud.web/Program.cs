@@ -14,5 +14,6 @@ RoutingConfig.Configure(app);
 AuthenticationConfig.Configure(app);
 
 TenantEndpointConfig.Configure(app);
+UserEndpointConfig.Configure(app);
 
 app.Run();
