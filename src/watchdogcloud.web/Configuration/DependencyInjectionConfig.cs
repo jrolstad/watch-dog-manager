@@ -1,5 +1,6 @@
 ﻿using Azure.Identity;
 using Microsoft.Azure.Cosmos;
+using watchdogcloud.core.Mappers;
 using watchdogcloud.core.Orchestrators;
 using watchdogcloud.core.Repositories;
 using watchdogcloud.core.Services;
@@ -12,6 +13,7 @@ namespace watchdogcloud.web.Configuration
         {
             services.AddTransient<TenantOrchestrator>();
             services.AddTransient<TenantRepository>();
+            services.AddTransient<TenantMapper>();
             
             ConfigureCosmosDb(services);
         }
