@@ -17,24 +17,24 @@ namespace watchdogcloud.core.Orchestrators
             return repository.Get(); 
         }
 
-        public Tenant Get(string id) 
+        public Task<Tenant> Get(string id) 
         { 
             return repository.Get(id); 
         }
 
-        public Tenant Create(Tenant toCreate)
+        public Task<Tenant> Create(Tenant toCreate)
         {
             return repository.Create(toCreate);
         }
 
-        public Tenant Update(Tenant toUpdate)
+        public Task<Tenant> Update(Tenant toUpdate)
         {
             return repository.Update(toUpdate);
         }
 
-        public void Delete(string id)
+        public Task Delete(string id)
         {
-            repository.Delete(id);
+            return repository.Delete(id);
         }
     }
 }

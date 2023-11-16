@@ -113,7 +113,5 @@ namespace watchdogcloud.core.Services
             return query.ToFeedIterator();
         }
 
-
     }
-}
 }

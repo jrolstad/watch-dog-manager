@@ -29,9 +29,9 @@ namespace watchdogcloud.web.Endpoints
 
         private static void ConfigureGet(IEndpointRouteBuilder app)
         {
-            app.MapGet($"/{ResourceName}/{{id}}", (string id, HttpContext httpContext, TenantOrchestrator orchestrator) =>
+            app.MapGet($"/{ResourceName}/{{id}}", async (string id, HttpContext httpContext, TenantOrchestrator orchestrator) =>
             {
-                return orchestrator.Get(id);
+                return await orchestrator.Get(id);
             })
             .WithName("GetTenant")
             .WithOpenApi()
@@ -40,9 +40,9 @@ namespace watchdogcloud.web.Endpoints
 
         private static void ConfigurePost(IEndpointRouteBuilder app)
         {
-            app.MapPost($"/{ResourceName}/", (Tenant body, HttpContext httpContext, TenantOrchestrator orchestrator) =>
+            app.MapPost($"/{ResourceName}/", async (Tenant body, HttpContext httpContext, TenantOrchestrator orchestrator) =>
             {
-                return orchestrator.Create(body);
+                return await orchestrator.Create(body);
             })
             .WithName("CreateTenant")
             .WithOpenApi()
@@ -51,9 +51,9 @@ namespace watchdogcloud.web.Endpoints
 
         private static void ConfigurePut(IEndpointRouteBuilder app)
         {
-            app.MapPut($"/{ResourceName}/{{id}}", (string id, Tenant body, HttpContext httpContext, TenantOrchestrator orchestrator) =>
+            app.MapPut($"/{ResourceName}/{{id}}", async (string id, Tenant body, HttpContext httpContext, TenantOrchestrator orchestrator) =>
             {
-                return orchestrator.Update(body);
+                return await orchestrator.Update(body);
             })
             .WithName("UpdateTenant")
             .WithOpenApi()
@@ -62,9 +62,9 @@ namespace watchdogcloud.web.Endpoints
 
         private static void ConfigureDelete(IEndpointRouteBuilder app)
         {
-            app.MapDelete($"/{ResourceName}/{{id}}", (string id, HttpContext httpContext, TenantOrchestrator orchestrator) =>
+            app.MapDelete($"/{ResourceName}/{{id}}", async (string id, HttpContext httpContext, TenantOrchestrator orchestrator) =>
             {
-                orchestrator.Delete(id);
+                await orchestrator.Delete(id);
             })
             .WithName("DeleteTenant")
             .WithOpenApi()

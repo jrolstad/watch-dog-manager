@@ -21,24 +21,24 @@ namespace watchdogcloud.core.Repositories
                 .ToList();
         }
 
-        public Tenant Get(string id) 
+        public Task<Tenant> Get(string id) 
         {
-            return cosmosDb.Get<Tenant>(id, collectionName, partitionKey).Result; 
+            return cosmosDb.Get<Tenant>(id, collectionName, partitionKey); 
         }
 
-        public Tenant Create(Tenant toCreate)
+        public Task<Tenant> Create(Tenant toCreate)
         {
-            return cosmosDb.Save(toCreate, collectionName, partitionKey).Result;
+            return cosmosDb.Save(toCreate, collectionName, partitionKey);
         }
 
-        public Tenant Update(Tenant toUpdate)
+        public Task<Tenant> Update(Tenant toUpdate)
         {
-            return cosmosDb.Save(toUpdate, collectionName, partitionKey).Result;
+            return cosmosDb.Save(toUpdate, collectionName, partitionKey);
         }
 
-        public void Delete(string id)
+        public Task Delete(string id)
         {
-            cosmosDb.Delete<Tenant>(id, collectionName, partitionKey);
+            return cosmosDb.Delete<Tenant>(id, collectionName, partitionKey);
         }
     }
 }
